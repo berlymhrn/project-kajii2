@@ -94,13 +94,11 @@ export default function Login() {
                         <div className="mt-10">
                             <CustomButton
                                 className="flex w-full items-center justify-center bg-primaryColor"
-                                // disabled={processing}
                                 text={"LOGIN"}
                                 bgColor={"bg-primaryColor"}
                             />
 
-                            <Link
-                                // href={route("register")}
+                            <Link href="/register"
                                 className="flex w-full mt-2 items-center justify-center underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                             >
                                 Belum memiliki akun?

@@ -1,171 +1,243 @@
-import React from "react";
+import React, { useState } from "react";
 import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import CustomButton from "@/Components/CustomButton";
 import { Link } from "@inertiajs/react";
+import { IconEye, IconEyeOff } from "@tabler/icons-react";
+import DesaKajii from "@/services/DesaKajii";
 
 export default function Register() {
+    const [nama, setNama] = useState("");
+    const [username, setUsername] = useState("");
+    const [no_telp, setNoTelpon] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    const [errors, setErrors] = useState({});
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
+    const validateForm = () => {
+        const errors = {};
+        if (!username.trim()) {
+            errors.username = "Username harus diisi";
+        } else if (username.trim().length > 255) {
+            errors.username = "Username tidak boleh terlalu panjang";
+        }
+
+        if (!nama.trim()) {
+            errors.nama = "Nama Lengkap harus diisi";
+        } else if (nama.trim().length > 255) {
+            errors.nama = "Nama tidak boleh terlalu panjang";
+        }
+
+        if (!no_telp.trim()) {
+            errors.no_telp = "Nomor Kontak harus diisi";
+        } else if (!/^\d{10,}$/.test(no_telp)) {
+            errors.no_telp = "Setidaknya 10 angka";
+        } else if (no_telp.trim().length > 255) {
+            errors.no_telp = "Telpon anda terlalu panjang";
+        }
+
+        if (!email.trim()) {
+            errors.email = "Email harus diisi";
+        } else if (!/\S+@\S+\.\S+/.test(email)) {
+            errors.email = "Format Email tidak valid";
+        } else if (email.trim().length > 255) {
+            errors.email = "Email anda terlalu panjang";
+        }
+
+        if (!password.trim()) {
+            errors.password = "Password harus diisi";
+        } else if (password.trim().length > 255) {
+            errors.password = "Password tidak boleh terlalu panjang";
+        } else if (
+            !/(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}/.test(password)
+        ) {
+            errors.password = "Setidaknya 8 karakter dengan angka dan simbol";
+        }
+
+        setErrors(errors);
+
+        return Object.keys(errors).length === 0;
+    };
+
+    const handleButton = async (e) => {
+        //function untuk submit form
+        e.preventDefault();
+
+        if (validateForm()) {
+            try {
+                const formData = {
+                    nama,
+                    username,
+                    email,
+                    no_telp,
+                    password,
+                };
+
+                const response = await DesaKajii.post(
+                    "/user/register",
+                    formData
+                );
+                console.log(response.data);
+            } catch (error) {
+                console.error("Error submitting registeration", error);
+            }
+        }
+    };
+
     return (
         <div className="min-h-screen flex flex-col sm:justify-center items-center p-6 bg-gray-100">
             <div className="w-full sm:max-w-md mt-0 px-6 py-6 bg-white shadow-md overflow-hidden sm:rounded-lg">
                 <div>
                     <form>
                         <div>
-                            <h5 className="w-full mb-6 font-bold text-h5 flex justify-center">
+                            <h1 className="w-full mb-14 font-bold text-h3 flex justify-center">
                                 Register
-                            </h5>
+                            </h1>
                         </div>
 
-                        <div>
+                        <div className="mb-4">
                             <InputLabel
-                                labelText="Nama"
-                                htmlFor="name"
-                                value="Name"
+                                labelFor={"name"}
+                                labelText={
+                                    <span>
+                                        Nama Lengkap
+                                        <span className="text-red-500">*</span>
+                                    </span>
+                                }
                             />
-
                             <TextInput
-                                id="name"
-                                name="name"
-                                // value={data.name}
-                                className="mt-1 block w-full"
-                                // autoComplete="name"
-                                // isFocused={true}
-                                // onChange={(e) =>
-                                //     setData("name", e.target.value)
-                                // }
-                                // required
+                                inputId={"name"}
+                                inputType={"text"}
+                                onChange={(e) => setNama(e.target.value)}
                             />
-
-                            {/* <InputError
-                                message={errors.name}
-                                className="mt-2"
-                            /> */}
+                            {errors.nama && (
+                                <div className="text-red-500">
+                                    {errors.nama}
+                                </div>
+                            )}
                         </div>
 
-                        <div className="mt-4">
+                        <div className="mb-4">
                             <InputLabel
-                                labelText="Email"
-                                htmlFor="password"
-                                value="Password"
+                                labelFor={"username"}
+                                labelText={
+                                    <span>
+                                        Username
+                                        <span className="text-red-500">*</span>
+                                    </span>
+                                }
                             />
-
                             <TextInput
-                                id="password"
-                                type="password"
-                                name="password"
-                                // value={data.password}
-                                className="mt-1 block w-full"
-                                // autoComplete="new-password"
-                                // onChange={(e) =>
-                                //     setData("password", e.target.value)
-                                // }
-                                // required
+                                inputId={"username"}
+                                inputType={"text"}
+                                onChange={(e) => setUsername(e.target.value)}
                             />
-
-                            {/* <InputError
-                                message={errors.password}
-                                className="mt-2"
-                            /> */}
+                            {errors.username && (
+                                <div className="text-red-500">
+                                    {errors.username}
+                                </div>
+                            )}
                         </div>
 
-                        <div className="mt-4">
+                        <div className="mb-4">
                             <InputLabel
-                                labelText="Telephone"
-                                htmlFor="password_confirmation"
-                                value="Confirm Password"
+                                labelFor={"email"}
+                                labelText={
+                                    <span>
+                                        Email
+                                        <span className="text-red-500">*</span>
+                                    </span>
+                                }
                             />
-
                             <TextInput
-                                id="password_confirmation"
-                                type="password"
-                                name="password_confirmation"
-                                // value={data.password_confirmation}
-                                className="mt-1 block w-full"
-                                // autoComplete="new-password"
-                                // onChange={(e) =>
-                                //     setData(
-                                //         "password_confirmation",
-                                //         e.target.value
-                                //     )
-                                // }
-                                // required
+                                inputId={"email"}
+                                inputType={"email"}
+                                onChange={(e) => setEmail(e.target.value)}
                             />
-
-                            {/* <InputError
-                                message={errors.password_confirmation}
-                                className="mt-2"
-                            /> */}
+                            {errors.email && (
+                                <div className="text-red-500">
+                                    {errors.email}
+                                </div>
+                            )}
                         </div>
 
-                        <div className="mt-4">
+                        <div className="mb-4">
                             <InputLabel
-                                labelText="Password"
-                                htmlFor="password_confirmation"
-                                value="Confirm Password"
+                                labelFor={"telepon"}
+                                labelText={
+                                    <span>
+                                        No Telepon
+                                        <span className="text-red-500">*</span>
+                                    </span>
+                                }
                             />
-
                             <TextInput
-                                id="password_confirmation"
-                                type="password"
-                                name="password_confirmation"
-                                // value={data.password_confirmation}
-                                className="mt-1 block w-full"
-                                // autoComplete="new-password"
-                                // onChange={(e) =>
-                                //     setData(
-                                //         "password_confirmation",
-                                //         e.target.value
-                                //     )
-                                // }
-                                // required
+                                inputId={"telepon"}
+                                inputType={"text"}
+                                onChange={(e) => setNoTelpon(e.target.value)}
                             />
-
-                            {/* <InputError
-                                message={errors.password_confirmation}
-                                className="mt-2"
-                            /> */}
+                            {errors.no_telp && (
+                                <div className="text-red-500">
+                                    {errors.no_telp}
+                                </div>
+                            )}
                         </div>
 
-                        <div className="mt-4">
+                        <div className="mb-4">
                             <InputLabel
-                                labelText="Ulang Password"
-                                htmlFor="password_confirmation"
-                                value="Confirm Password"
+                                labelFor="password"
+                                labelText={
+                                    <span>
+                                        Password
+                                        <span className="text-red-500">*</span>
+                                    </span>
+                                }
                             />
-
-                            <TextInput
-                                id="password_confirmation"
-                                type="password"
-                                name="password_confirmation"
-                                // value={data.password_confirmation}
-                                className="mt-1 block w-full"
-                                // autoComplete="new-password"
-                                // onChange={(e) =>
-                                //     setData(
-                                //         "password_confirmation",
-                                //         e.target.value
-                                //     )
-                                // }
-                                // required
-                            />
-
-                            {/* <InputError
-                                message={errors.password_confirmation}
-                                className="mt-2"
-                            /> */}
+                            <div className="relative">
+                                <TextInput
+                                    inputId="password"
+                                    inputType={
+                                        showPassword ? "text" : "password"
+                                    }
+                                    value={password}
+                                    onChange={(e) =>
+                                        setPassword(e.target.value)
+                                    }
+                                />
+                                <button
+                                    type="button"
+                                    className="absolute right-3 top-1/2 transform -translate-y-1/2"
+                                    onClick={togglePasswordVisibility}
+                                >
+                                    {showPassword ? (
+                                        <IconEyeOff />
+                                    ) : (
+                                        <IconEye />
+                                    )}
+                                </button>
+                                {errors.password && (
+                                    <div className="text-red-500 absolute top-full left-0">
+                                        {errors.password}
+                                    </div>
+                                )}
+                            </div>
                         </div>
 
-                        <div className="mt-10">
+                        <div className="mt-20">
                             <CustomButton
-                                className="flex w-full items-center justify-center bg-primaryColor"
-                                // disabled={processing}
                                 text={"REGISTER"}
                                 bgColor={"bg-primaryColor"}
+                                onClick={handleButton}
                             />
 
                             <Link
-                                // href={route("register")}
-                                className="flex w-full mt-2 items-center justify-center underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                href="/login"
+                                className="flex justify-start w-full mt-2 underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                             >
                                 Sudah memiliki akun?
                             </Link>

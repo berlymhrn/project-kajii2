@@ -5,7 +5,7 @@ import CustomButton from "@/Components/CustomButton";
 import { usePage } from "@inertiajs/react";
 
 function BookingForm2() {
-     const [name, setName] = useState("");
+    const [name, setName] = useState("");
     const [telephone, setTelephone] = useState("");
     const [email, setEmail] = useState("");
     const [bookingType, setBookingType] = useState("");
@@ -52,7 +52,13 @@ function BookingForm2() {
         e.preventDefault();
 
         if (validateForm()) {
-            const bookingData = { name, telephone, email, bookingType, checkIn };
+            const bookingData = {
+                name,
+                telephone,
+                email,
+                bookingType,
+                checkIn,
+            };
             window.location.href = "/booking/paymentMethod";
         }
     };
@@ -159,9 +165,7 @@ function BookingForm2() {
                             <TextInput
                                 inputId={"booking"}
                                 inputType={"text"}
-                                onChange={(e) =>
-                                    setBookingType(e.target.value)
-                                }
+                                onChange={(e) => setBookingType(e.target.value)}
                             />
                             {errors.bookingType && (
                                 <div className="text-red-500">
