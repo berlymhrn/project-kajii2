@@ -1,7 +1,11 @@
 import React from "react";
+import { usePage } from "@inertiajs/react";
 import CustomButton from "@/Components/CustomButton";
 
 function Payment() {
+    // const { props } = usePage();
+    // const { bookingData } = props.state;
+
     const radios = [
         {
             name: "Pembayaran Depan Muka",
@@ -113,10 +117,19 @@ function Payment() {
                         </h4>
                         <div className="mx-10 mt-20">
                             <h4 className="text-p18 md:text-h5 font-semibold">
-                                Jenis Booking :
+                                Nama Lengkap :{/* {bookingData.name} */}
                             </h4>
                             <h4 className="text-p18 md:text-h5 font-semibold">
-                                Tanggal CheckIn :
+                                No Telpon :{/* {bookingData.telephone} */}
+                            </h4>
+                            <h4 className="text-p18 md:text-h5 font-semibold">
+                                Email :{/* {bookingData.email} */}
+                            </h4>
+                            <h4 className="text-p18 md:text-h5 font-semibold">
+                                Jenis Booking :{/* {bookingData.bookingType} */}
+                            </h4>
+                            <h4 className="text-p18 md:text-h5 font-semibold">
+                                Tanggal CheckIn :{/* {bookingData.checkIn} */}
                             </h4>
                         </div>
                     </div>
