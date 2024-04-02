@@ -1,14 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import CardTransaksi from "@/Components/CardTransaction";
-import Profile2 from "../../../../public/assets/profile2.jpg";
 import CustomButton from "@/Components/CustomButton";
-import Navbar4 from "@/Components/Navbar4";
 
 function TransactionHistory() {
     return (
-        <div>
-             <Navbar4 />
-        
         <div className="mx-12 md:mx-20">
             <div className="mb-20 md:mb-32">
                 <h1 className="font-bold text-h2 md:text-h1 mt-20 flex justify-center mb-12 md:mb-16">
@@ -25,7 +20,6 @@ function TransactionHistory() {
                         action={
                             <CustomButton
                                 text={"Batal"}
-                                linkTo={"#"}
                                 bgColor={"bg-red-600"}
                                 font={"font-medium"}
                             />
@@ -41,7 +35,6 @@ function TransactionHistory() {
                     />
                 </div>
             </div>
-        </div>
         </div>
     );
 }

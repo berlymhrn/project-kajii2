@@ -1,4 +1,5 @@
 import React from "react";
+import CustomButton from "@/Components/CustomButton";
 
 function Payment() {
     const radios = [
@@ -72,35 +73,64 @@ function Payment() {
     ];
     return (
         <div className="min-h-screen px-4 md:px-12 lg:px-20">
-            <h2 className="text-h3 md:text-h2 text-gray-800 font-semibold text-center">
-                Pilih Metode Pembayaran
-            </h2>
-            <ul className="mt-6 space-y-3 w-full">
-                {radios.map((item, idx) => (
-                    <li key={idx}>
-                        <label htmlFor={item.name} className="block relative">
-                            <input
-                                id={item.name}
-                                type="radio"
-                                defaultChecked={idx === 1}
-                                name="payment"
-                                className="sr-only peer"
-                            />
-                            <div className="w-full flex gap-x-3 items-start p-8 cursor-pointer rounded-lg border bg-white shadow-sm ring-indigo-600 peer-checked:ring-2 duration-200">
-                                <div className="flex-none w-20 h-6">
-                                    {item.icon}
+            <h1 className="font-bold text-h2 mt-20 text-center mb-12 md:mb-16">
+                Metode Pembayaran
+            </h1>
+            <div className="grid grid-cols-2 gap-5 mb-16">
+                <ul className="space-y-3 w-full">
+                    {radios.map((item, idx) => (
+                        <li key={idx}>
+                            <label
+                                htmlFor={item.name}
+                                className="block relative"
+                            >
+                                <input
+                                    id={item.name}
+                                    type="radio"
+                                    defaultChecked={idx === 1}
+                                    name="payment"
+                                    className="sr-only peer"
+                                />
+                                <div className="w-full flex gap-x-3 items-start p-8 cursor-pointer rounded-lg border bg-white shadow-sm ring-indigo-600 peer-checked:ring-2 duration-200">
+                                    <div className="flex-none w-20 h-6">
+                                        {item.icon}
+                                    </div>
+                                    <div>
+                                        <h3 className="leading-none text-gray-800 text-p18 md:text-h5 font-semibold ml-8">
+                                            {item.name}
+                                        </h3>
+                                    </div>
                                 </div>
-                                <div>
-                                    <h3 className="leading-none text-gray-800 text-p18 md:text-h5 font-bold ml-8">
-                                        {item.name}
-                                    </h3>
-                                </div>
-                            </div>
-                            <div className="absolute top-8 right-4 flex-none flex items-center justify-center w-4 h-4 rounded-full border peer-checked:bg-indigo-600 text-white peer-checked:text-white duration-200"></div>
-                        </label>
-                    </li>
-                ))}
-            </ul>
+                                <div className="absolute top-8 right-4 flex-none flex items-center justify-center w-4 h-4 rounded-full border peer-checked:bg-indigo-600 text-white peer-checked:text-white duration-200"></div>
+                            </label>
+                        </li>
+                    ))}
+                </ul>
+                <div className="w-full h-96 border rounded-xl">
+                    <div className="border w-full h-24 rounded-t-xl bg-primaryColor">
+                        <h4 className="mx-10 my-8 text-p18 md:text-h5 font-bold text-white">
+                            Preview Pemesanan
+                        </h4>
+                        <div className="mx-10 mt-20">
+                            <h4 className="text-p18 md:text-h5 font-semibold">
+                                Jenis Booking :
+                            </h4>
+                            <h4 className="text-p18 md:text-h5 font-semibold">
+                                Tanggal CheckIn :
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="mb-20">
+                <CustomButton
+                    text={"Selanjutnya"}
+                    bgColor={"bg-primaryColor"}
+                    font={"text-white font-bold"}
+                    linkTo={"/booking/paymentMethod/steps"}
+                    // onClick={handleButton}
+                />
+            </div>
         </div>
     );
 }

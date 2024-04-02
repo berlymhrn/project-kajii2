@@ -14,7 +14,6 @@ import { Link } from "@inertiajs/react";
 import Navbar4 from "@/Components/Navbar4";
 
 function Index() {
-    const images = [Profile2, Profile2, image1, Profile2, image1];
 
     const [slideIndex, setSlideIndex] = useState(0);
     const settings = {

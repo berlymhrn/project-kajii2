@@ -26,16 +26,18 @@ function CardTransaksi({
                     <h5 className=" text-2xl font-bold tracking-tight">
                         {header}
                     </h5>
+
                     <p className="mb-8 font-medium text-p16 text-gray-500">
                         {time}
                     </p>
-                    <p
-                        className={`${titleTruncatedFont} mb-10 font-bold text-h5`}
-                    >
+                    <p className={`${titleTruncatedFont} font-bold text-h5`}>
                         {truncatedTitle}
                     </p>
+                    <p className=" mb-10 font-medium">
+                        Check In: 3 Januari 2025{" "}
+                    </p>
                     <div className="w-full flex flex-wrap justify-between">
-                        <p className="inline-flex items-center justify-center font-medium text-p16 text-gray-700">
+                        <p className="inline-flex items-center justify-center font-semibold text-p16">
                             {smallTitle}
                         </p>
                         <div className="flex justify-end">
