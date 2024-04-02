@@ -66,5 +66,5 @@ Route::get('/register', function () {
     return Inertia::render('Auth/Register');
 });
 Route::get('/akun', function () {
-    return Inertia::render('ProfileUser/ProfileAccount');
+    return Inertia::render('Account/ProfileAccount');
 });
