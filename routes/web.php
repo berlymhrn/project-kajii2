@@ -1,15 +1,6 @@
 <?php
-
-use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-
-require __DIR__.'/auth.php';
-
-// Route::get('/detail/{id}', function ($id) {
-//     return Inertia::render('CobaDetail', ['id' => $id]);
-// });
 
 Route::get('/', function () {
     return Inertia::render('Home/Index');
@@ -54,15 +45,15 @@ Route::get('/hiburan', function () {
     return Inertia::render('hiburan/Index');
 });
 Route::get('/booking', function () {
-    return Inertia::render('Booking/BookingForm');
+    return Inertia::render('Booking/BookingForm2');
 });
 Route::get('/booking/detail', function () {
     return Inertia::render('Booking/BookingDetail');
 });
-Route::get('/booking/detail/paymentMethod', function () {
+Route::get('/booking/paymentMethod', function () {
     return Inertia::render('Booking/Payment');
 });
-Route::get('/booking/detail/paymentMethod/steps', function () {
+Route::get('/booking/paymentMethod/steps', function () {
     return Inertia::render('Booking/PaymentSteps');
 });
 Route::get('/account/history', function () {
