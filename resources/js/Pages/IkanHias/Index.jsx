@@ -13,7 +13,6 @@ import MiniCardSkeleton from "@/Components/loading/MiniCardSkeleton";
 import { Link } from "@inertiajs/react";
 
 function Index() {
-    const images = [Profile2, Profile2, image1, Profile2, image1];
 
     const [slideIndex, setSlideIndex] = useState(0);
     const settings = {

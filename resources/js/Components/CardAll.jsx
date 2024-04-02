@@ -1,5 +1,5 @@
 import React from "react";
-import Scrollbar from "./../Components/css/Scrollbar.css";
+import "./css/Scrollbar.css";
 
 function CardAll({
     img,

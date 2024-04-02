@@ -8,7 +8,7 @@ import AxiosInstance from "@/services/AxiosInstance";
 function BookingForm() {
     const [name, setName] = useState("");                   //stete untuk menyimpan input yg dimasukkan user di di textInput nama
     const [bithdate, setBithdate] = useState("");           //stete untuk menyimpan input yg dimasukkan user di di textInput tanggal lahir
-    const [address, setAddress] = useState("");             
+    const [address, setAddress] = useState("");
     const [telephone, setTelephone] = useState("");
     const [email, setEmail] = useState("");
     const [bookingType, setBookingType] = useState("");
@@ -101,7 +101,7 @@ function BookingForm() {
                             labelFor={"nama"}
                             labelText={
                                 <span>
-                                    Nama Lengkap{" "}
+                                    Nama Lengkap
                                     <span className="text-red-500">*</span>
                                 </span>
                             }

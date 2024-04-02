@@ -401,38 +401,6 @@ function Index() {
 
                 <div className="mb-20 md:mb-32">
                     <h2 className="text-h5 md:text-h2 font-bold mb-3 md:mb-8">
-                        implementasi card transaksi
-                    </h2>
-                    <div className="flex flex-wrap gap-3">
-                        <CardTransaksi
-                            img={Profile2}
-                            header={"Transaksi"}
-                            time={"12 Desember 2012"}
-                            title={"1.000.000"}
-                            titleTruncatedFont={"font-bold"}
-                            smallTitle={"Sisa pembayaran : IDR 100.000"}
-                            action={
-                                <CustomButton
-                                    text={"Batal"}
-                                    linkTo={"#"}
-                                    bgColor={"bg-red-600"}
-                                    font={"font-medium"}
-                                />
-                            }
-                            anotherAction={
-                                <CustomButton
-                                    text={"DP"}
-                                    linkTo={"#"}
-                                    bgColor={"bg-primaryColor"}
-                                    font={"font-medium"}
-                                />
-                            }
-                        />
-                    </div>
-                </div>
-
-                <div className="mb-20 md:mb-32">
-                    <h2 className="text-h5 md:text-h2 font-bold mb-3 md:mb-8">
                         Pertanyaan Paling Sering Ditanyakan
                     </h2>
                     {renderFaq()}
