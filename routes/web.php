@@ -59,3 +59,12 @@ Route::get('/booking/paymentMethod/steps', function () {
 Route::get('/account/history', function () {
     return Inertia::render('ProfileUser/TransactionHistory');
 });
+Route::get('/login', function () {
+    return Inertia::render('Auth/Login');
+});
+Route::get('/register', function () {
+    return Inertia::render('Auth/Register');
+});
+Route::get('/akun', function () {
+    return Inertia::render('Account/ProfileAccount');
+});
