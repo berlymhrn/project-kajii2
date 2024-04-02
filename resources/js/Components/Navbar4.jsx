@@ -190,7 +190,7 @@ const Navbar = () => {
                             <span className="sr-only">Open user menu</span>
                         </button>
 
-                        <Dropdown
+                        {/* <Dropdown
                             isOpen={isAccountDropdownOpen}
                             toggle={toggleAccountDropdown}
                             className="right-10 md:right-48 top-24"
@@ -210,7 +210,7 @@ const Navbar = () => {
                             <Link href="#">
                                 <DropdownItem>Log out</DropdownItem>
                             </Link>
-                        </Dropdown>
+                        </Dropdown> */}
                     </div>
                 </div>
 

@@ -64,7 +64,11 @@ const Footer = () => {
                         </div>
 
                         <LinkGroup header="Pelayanan">
-                            <NavLink link="/" label="Home" />
+                            <NavLink
+                                link="/"
+                                label="Home"
+                                className="text-white"
+                            />
                             <NavLink link="/ikan-hias" label="Ikan Hias" />
                             <NavLink
                                 link="/paket-wisata"
@@ -82,7 +86,7 @@ const Footer = () => {
                                 <h4 className="mb-9 text-lg font-semibold text-dark dark:text-white">
                                     Lokasi
                                 </h4>
-                                <p className="text-base text-body-color dark:text-dark-6">
+                                <p className="text-base text-body-color text-white">
                                     &copy; Lorem ipsum, dolor sit amet
                                     consectetur adipisicing elit. Quos dolor
                                     deleniti voluptatum quasi, iste ut natus
@@ -157,7 +161,7 @@ const NavLink = ({ link, label }) => {
         <li>
             <a
                 href={link}
-                className="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
+                className="inline-block text-base leading-loose text-body-color hover:text-primary text-white"
             >
                 {label}
             </a>

@@ -12,6 +12,7 @@ import DesaKajii from "@/services/DesaKajii";
 import MiniCardSkeleton from "@/Components/loading/MiniCardSkeleton";
 import { Link } from "@inertiajs/react";
 import Navbar4 from "@/Components/Navbar4";
+import Footer from "@/Components/Footer";  
 
 function Index() {
 
@@ -207,6 +208,7 @@ function Index() {
                     Lembaga Kerja Sama
                 </h2>
             </div>
+            <Footer />
         </div>
     );
 }

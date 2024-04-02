@@ -4,6 +4,7 @@ import DesaKajii from "@/services/DesaKajii";
 import TextSkeleton from "@/Components/loading/TextSkeleton";
 import TimelineSkeleton from "@/Components/loading/TimelineSkeleton";
 import Navbar4 from "@/Components/Navbar4";
+import Footer from "@/Components/Footer"; 
 
 
 function Index() {
@@ -90,6 +91,7 @@ function Index() {
                 {renderTimeline()}
             </ol>
         </div>
+        <Footer />
         </div>
     );
 }

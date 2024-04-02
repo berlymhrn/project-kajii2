@@ -4,6 +4,7 @@ import CustomButton from "@/Components/CustomButton";
 import MiniCardSkeleton from "@/Components/loading/MiniCardSkeleton";
 import DesaKajii from "@/services/DesaKajii";
 import Navbar4 from "@/Components/Navbar4";
+import Footer from "@/Components/Footer"; 
 
 function Index() {
     const [homestay, setHomestay] = useState([]);
@@ -71,6 +72,7 @@ function Index() {
                 </h1>
                 <div className="flex flex-wrap gap-3">{renderHomestay()}</div>
             </div>
+            <Footer />
         </div>
     );
 }

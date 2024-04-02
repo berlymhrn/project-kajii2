@@ -5,6 +5,7 @@ import CardTransSkeleton from "@/Components/loading/CardTransSkeleton";
 import DesaKajii from "@/services/DesaKajii";
 import NoData from "../../../../public/assets/noData.png";
 import Navbar4 from "@/Components/Navbar4";
+import Footer from "@/Components/Footer"; 
 
 
 function Index() {
@@ -78,6 +79,7 @@ function Index() {
                 </h1>
                 <div className="flex flex-wrap gap-3 mb-2">{renderNews()}</div>
             </div>
+            <Footer />
         </div>
     );
 }

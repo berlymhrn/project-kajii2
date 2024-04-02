@@ -5,6 +5,7 @@ import Feature from "@/Components/ListFeature";
 import MiniCardSkeleton from "@/Components/loading/MiniCardSkeleton";
 import DesaKajii from "@/services/DesaKajii";
 import Navbar4 from "@/Components/Navbar4";
+import Footer from "@/Components/Footer"; 
 
 function Index() {
     const [paketWisata, setPaketWisata] = useState([]);
@@ -85,6 +86,7 @@ function Index() {
                     {renderPaketWisata()}
                 </div>
             </div>
+            <Footer />
         </div>
     );
 }

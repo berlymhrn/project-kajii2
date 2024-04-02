@@ -4,6 +4,7 @@ import CustomButton from "@/Components/CustomButton";
 import DesaKajii from "@/services/DesaKajii";
 import MiniCardSkeleton from "@/Components/loading/MiniCardSkeleton";
 import Navbar4 from "@/Components/Navbar4";
+import Footer from "@/Components/Footer"; 
 
 function Index() {
     const [kegiatans, setKegiatans] = useState([]);
@@ -65,6 +66,7 @@ function Index() {
                 </h1>
                 <div className="flex flex-wrap gap-3">{renderKegiatan()}</div>
             </div>
+            <Footer />
         </div>
     );
 }
