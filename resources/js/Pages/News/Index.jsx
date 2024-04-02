@@ -4,6 +4,8 @@ import CustomButton from "@/Components/CustomButton";
 import CardTransSkeleton from "@/Components/loading/CardTransSkeleton";
 import DesaKajii from "@/services/DesaKajii";
 import NoData from "../../../../public/assets/noData.png";
+import Navbar4 from "@/Components/Navbar4";
+
 
 function Index() {
     const [news, setNews] = useState([]);
@@ -68,11 +70,14 @@ function Index() {
     };
 
     return (
-        <div className="mx-12 md:mx-20 ">
-            <h1 className="font-bold text-h2 md:text-h1 mt-20 flex justify-center mb-12 md:mb-16">
-                Berita & Artikel
-            </h1>
-            <div className="flex flex-wrap gap-3 mb-2">{renderNews()}</div>
+        <div>
+            <Navbar4 />
+            <div className="mx-12 md:mx-20 ">
+                <h1 className="font-bold text-h2 md:text-h1 mt-20 flex justify-center mb-12 md:mb-16">
+                    Berita & Artikel
+                </h1>
+                <div className="flex flex-wrap gap-3 mb-2">{renderNews()}</div>
+            </div>
         </div>
     );
 }

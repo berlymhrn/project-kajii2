@@ -11,6 +11,7 @@ import CardActivity from "@/Components/CardActivity";
 import DesaKajii from "@/services/DesaKajii";
 import MiniCardSkeleton from "@/Components/loading/MiniCardSkeleton";
 import { Link } from "@inertiajs/react";
+import Navbar4 from "@/Components/Navbar4";
 
 function Index() {
     const images = [Profile2, Profile2, image1, Profile2, image1];
@@ -163,12 +164,16 @@ function Index() {
         ));
 
     return (
-        <div className="mx-12 md:mx-20">
-            <h1 className="font-bold text-h3 md:text-h1 mt-20 text-center mb-12 md:mb-16">
-                Ikan Hias Terbaik
-            </h1>
-            <div className="slider w-full h-96">
-                <Slider {...settings}>{renderIkanTerbaik()}</Slider>
+        <div>
+            <Navbar4 />
+
+            <div className="mx-12 md:mx-20">
+                <h1 className="font-bold text-h3 md:text-h1 mt-20 text-center mb-12 md:mb-16">
+                    Ikan Hias Terbaik
+                </h1>
+                <div className="slider w-full h-96">
+                    <Slider {...settings}>{renderIkanTerbaik()}</Slider>
+                </div>
             </div>
             <div className="mb-20">
                 <h2 className="font-bold text-h5 md:text-h2 mt-20 mb-3 md:mb-8">

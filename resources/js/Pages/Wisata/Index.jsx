@@ -4,6 +4,7 @@ import CustomButton from "@/Components/CustomButton";
 import Feature from "@/Components/ListFeature";
 import MiniCardSkeleton from "@/Components/loading/MiniCardSkeleton";
 import DesaKajii from "@/services/DesaKajii";
+import Navbar4 from "@/Components/Navbar4";
 
 function Index() {
     const [paketWisata, setPaketWisata] = useState([]);
@@ -73,11 +74,17 @@ function Index() {
         });
     };
     return (
-        <div className="mx-12 md:mx-20 ">
-            <h1 className="font-bold text-h2 md:text-h1 mt-20 flex justify-center mb-12 md:mb-16">
-                PAKET WISATA
-            </h1>
-            <div className="flex flex-wrap gap-3">{renderPaketWisata()}</div>
+        <div>
+            <Navbar4 />
+
+            <div className="mx-12 md:mx-20 ">
+                <h1 className="font-bold text-h2 md:text-h1 mt-20 flex justify-center mb-12 md:mb-16">
+                    PAKET WISATA
+                </h1>
+                <div className="flex flex-wrap gap-3">
+                    {renderPaketWisata()}
+                </div>
+            </div>
         </div>
     );
 }

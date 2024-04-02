@@ -3,6 +3,7 @@ import CardAll from "@/Components/CardAll";
 import CustomButton from "@/Components/CustomButton";
 import MiniCardSkeleton from "@/Components/loading/MiniCardSkeleton";
 import DesaKajii from "@/services/DesaKajii";
+import Navbar4 from "@/Components/Navbar4";
 
 function Index() {
     const [homestay, setHomestay] = useState([]);
@@ -61,11 +62,15 @@ function Index() {
     };
 
     return (
-        <div className="mx-12 md:mx-20 ">
-            <h1 className="font-bold text-h2 md:text-h1 mt-20 flex justify-center mb-12 md:mb-16">
-                HOMESTAY
-            </h1>
-            <div className="flex flex-wrap gap-3">{renderHomestay()}</div>
+        <div>
+            <Navbar4 />
+
+            <div className="mx-12 md:mx-20 ">
+                <h1 className="font-bold text-h2 md:text-h1 mt-20 flex justify-center mb-12 md:mb-16">
+                    HOMESTAY
+                </h1>
+                <div className="flex flex-wrap gap-3">{renderHomestay()}</div>
+            </div>
         </div>
     );
 }

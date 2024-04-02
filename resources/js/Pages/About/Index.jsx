@@ -3,11 +3,14 @@ import TimelineComponent from "@/Components/Timeline";
 import DesaKajii from "@/services/DesaKajii";
 import TextSkeleton from "@/Components/loading/TextSkeleton";
 import TimelineSkeleton from "@/Components/loading/TimelineSkeleton";
+import Navbar4 from "@/Components/Navbar4";
+
 
 function Index() {
     const [profileDesc, setProfileDesc] = useState(""); //string kosong karena langsung mengambil deskripsi saja
     const [timeline, setTimeline] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    
 
     useEffect(() => {
         const fetchData = async () => {
@@ -69,6 +72,8 @@ function Index() {
     };
 
     return (
+        <div>
+            <Navbar4 />
         <div className="mx-12 md:mx-20 ">
             <h1 className="font-bold text-h2 md:text-h1 mt-20 flex justify-center mb-12 md:mb-16">
                 Tentang Kami
@@ -84,6 +89,7 @@ function Index() {
             <ol className="relative border-s border-primaryColor">
                 {renderTimeline()}
             </ol>
+        </div>
         </div>
     );
 }
