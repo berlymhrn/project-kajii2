@@ -65,7 +65,6 @@ export default function Register() {
     };
 
     const handleButton = async (e) => {
-        //function untuk submit form
         e.preventDefault();
 
         if (validateForm()) {
@@ -82,9 +81,29 @@ export default function Register() {
                     "/user/register",
                     formData
                 );
+
                 console.log(response.data);
             } catch (error) {
-                console.error("Error submitting registeration", error);
+                if (error.response) {
+                    const { data, status } = error.response;
+
+                    if (
+                        status === 422 &&
+                        data.info === "Email yang anda masukkan sudah ada"
+                    ) {
+                        setErrors({ email: data.info });
+                    } else {
+                        console.error("Error submitting registration", error);
+                        setErrors({
+                            general: "Terjadi kesalahan saat pendaftaran.",
+                        });
+                    }
+                } else {
+                    console.error("Error submitting registration", error);
+                    setErrors({
+                        general: "Terjadi kesalahan saat pendaftaran.",
+                    });
+                }
             }
         }
     };
