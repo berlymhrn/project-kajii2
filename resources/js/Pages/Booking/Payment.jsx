@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { usePage } from "@inertiajs/react";
 import CustomButton from "@/Components/CustomButton";
 
 function Payment() {
-    // const { props } = usePage();
-    // const { bookingData } = props.state;
+    const [bookingData, setBookingData] = useState({});
+
+    useEffect(() => {
+        const storedData = localStorage.getItem("bookingData");
+        if (storedData) {
+            setBookingData(JSON.parse(storedData));
+        }
+    }, []);
 
     const radios = [
         {
@@ -75,6 +81,7 @@ function Payment() {
             ),
         },
     ];
+
     return (
         <div className="min-h-screen px-4 md:px-12 lg:px-20">
             <h1 className="font-bold text-h2 mt-20 text-center mb-12 md:mb-16">
@@ -117,19 +124,19 @@ function Payment() {
                         </h4>
                         <div className="mx-10 mt-20">
                             <h4 className="text-p18 md:text-h5 font-semibold">
-                                Nama Lengkap :{/* {bookingData.name} */}
+                                Nama Lengkap :{bookingData.name}
                             </h4>
                             <h4 className="text-p18 md:text-h5 font-semibold">
-                                No Telpon :{/* {bookingData.telephone} */}
+                                No Telpon :{bookingData.telephone}
                             </h4>
                             <h4 className="text-p18 md:text-h5 font-semibold">
-                                Email :{/* {bookingData.email} */}
+                                Email :{bookingData.email}
                             </h4>
                             <h4 className="text-p18 md:text-h5 font-semibold">
-                                Jenis Booking :{/* {bookingData.bookingType} */}
+                                Jenis Booking :{bookingData.bookingType}
                             </h4>
                             <h4 className="text-p18 md:text-h5 font-semibold">
-                                Tanggal CheckIn :{/* {bookingData.checkIn} */}
+                                Tanggal CheckIn :{bookingData.checkIn}
                             </h4>
                         </div>
                     </div>

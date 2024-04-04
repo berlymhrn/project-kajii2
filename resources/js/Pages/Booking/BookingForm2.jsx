@@ -50,7 +50,7 @@ function BookingForm2() {
 
     const handleButton = async (e) => {
         e.preventDefault();
-
+    
         if (validateForm()) {
             const bookingData = {
                 name,
@@ -59,9 +59,12 @@ function BookingForm2() {
                 bookingType,
                 checkIn,
             };
+            localStorage.setItem('bookingData', JSON.stringify(bookingData));
+    
             window.location.href = "/booking/paymentMethod";
         }
     };
+    
 
     return (
         <div className="mx-12 md:mx-20">

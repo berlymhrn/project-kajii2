@@ -1,6 +1,15 @@
 <?php
+
+use App\Http\Controllers\ProfileController;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+
+require __DIR__.'/auth.php';
+
+// Route::get('/detail/{id}', function ($id) {
+//     return Inertia::render('CobaDetail', ['id' => $id]);
+// });
 
 Route::get('/', function () {
     return Inertia::render('Home/Index');
@@ -66,5 +75,5 @@ Route::get('/register', function () {
     return Inertia::render('Auth/Register');
 });
 Route::get('/akun', function () {
-    return Inertia::render('Account/ProfileAccount');
+    return Inertia::render('ProfileUser/ProfileAccount');
 });

@@ -1,10 +1,72 @@
-import React from "react";
+import React, { useState } from "react";
 import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import CustomButton from "@/Components/CustomButton";
 import { Link } from "@inertiajs/react";
+import { IconEye, IconEyeOff } from "@tabler/icons-react";
+import DesaKajii from "@/services/DesaKajii";
 
 export default function Login() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    const [errors, setErrors] = useState({});
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
+    const validateForm = () => {
+        const errors = {};
+
+        if (!email.trim()) {
+            errors.email = "Email harus diisi";
+        } else if (!/\S+@\S+\.\S+/.test(email)) {
+            errors.email = "Format Email tidak valid";
+        } else if (email.trim().length > 255) {
+            errors.email = "Email anda terlalu panjang";
+        }
+
+        if (!password.trim()) {
+            errors.password = "Password harus diisi";
+        } else if (password.trim().length > 255) {
+            errors.password = "Password tidak boleh terlalu panjang";
+        } else if (
+            !/(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}/.test(password)
+        ) {
+            errors.password = "Setidaknya 8 karakter dengan angka dan simbol";
+        }
+
+        setErrors(errors);
+
+        return Object.keys(errors).length === 0;
+    };
+
+    const handleButton = async (e) => {
+        //function untuk submit form
+        e.preventDefault();
+
+        if (validateForm()) {
+            try {
+                const formData = {
+                    nama,
+                    username,
+                    email,
+                    no_telp,
+                    password,
+                };
+
+                const response = await DesaKajii.post(
+                    "/user/register",
+                    formData
+                );
+                console.log(response.data);
+            } catch (error) {
+                console.error("Error submitting registeration", error);
+            }
+        }
+    };
+
     return (
         <div className="min-h-screen flex flex-col sm:justify-center items-center p-6 bg-gray-100">
             <div className="w-full sm:max-w-md mt-0 px-6 py-6 bg-white shadow-md overflow-hidden sm:rounded-lg">
@@ -16,90 +78,78 @@ export default function Login() {
                             </h5>
                         </div>
 
-                        <div>
+                        <div className="mb-4">
                             <InputLabel
-                                labelText="Email"
-                                // htmlFor="email"
-                                // value="Email"
+                                labelFor={"email"}
+                                labelText={
+                                    <span>
+                                        Email
+                                        <span className="text-red-500">*</span>
+                                    </span>
+                                }
                             />
-
                             <TextInput
-                                id="email"
-                                type="email"
-                                name="email"
-                                // value={data.email}
-                                className="mt-1 block w-full"
-                                // autoComplete="username"
-                                // isFocused={true}
-                                // onChange={(e) =>
-                                //     setData("email", e.target.value)
-                                // }
+                                inputId={"email"}
+                                inputType={"email"}
+                                onChange={(e) => setEmail(e.target.value)}
                             />
-
-                            {/* <InputError
-                                message={errors.email}
-                                className="mt-2"
-                            /> */}
+                            {errors.email && (
+                                <div className="text-red-500">
+                                    {errors.email}
+                                </div>
+                            )}
                         </div>
 
-                        <div className="mt-4">
+                        <div className="mb-4">
                             <InputLabel
-                                labelText="Password"
-                                // htmlFor="password"
-                                // value="Password"
+                                labelFor="password"
+                                labelText={
+                                    <span>
+                                        Password
+                                        <span className="text-red-500">*</span>
+                                    </span>
+                                }
                             />
-
-                            <TextInput
-                                id="password"
-                                type="password"
-                                name="password"
-                                // value={data.password}
-                                className="mt-1 block w-full"
-                                // autoComplete="current-password"
-                                // onChange={(e) =>
-                                //     setData("password", e.target.value)
-                                // }
-                            />
-
-                            {/* <InputError
-                                message={errors.password}
-                                className="mt-2"
-                            /> */}
-
-                            {/* {canResetPassword && (
-                                <Link
-                                    href={route("password.request")}
-                                    className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                >
-                                    Forgot your password?
-                                </Link>
-                            )} */}
-                        </div>
-
-                        {/* <div className="block mt-4">
-                            <label className="flex items-center">
-                                <Checkbox
-                                    name="remember"
-                                    checked={data.remember}
+                            <div className="relative">
+                                <TextInput
+                                    inputId="password"
+                                    inputType={
+                                        showPassword ? "text" : "password"
+                                    }
+                                    value={password}
                                     onChange={(e) =>
-                                        setData("remember", e.target.checked)
+                                        setPassword(e.target.value)
                                     }
                                 />
-                                <span className="ms-2 text-sm text-gray-600">
-                                    Remember me
-                                </span>
-                            </label>
-                        </div> */}
+                                <button
+                                    type="button"
+                                    className="absolute right-3 top-1/2 transform -translate-y-1/2"
+                                    onClick={togglePasswordVisibility}
+                                >
+                                    {showPassword ? (
+                                        <IconEyeOff />
+                                    ) : (
+                                        <IconEye />
+                                    )}
+                                </button>
+                                {errors.password && (
+                                    <div className="text-red-500 absolute top-full left-0">
+                                        {errors.password}
+                                    </div>
+                                )}
+                            </div>
+                        </div>
 
                         <div className="mt-10">
                             <CustomButton
-                                className="flex w-full items-center justify-center bg-primaryColor"
                                 text={"LOGIN"}
                                 bgColor={"bg-primaryColor"}
+                                onClick={handleButton}
                             />
 
-                            <Link href="/register"
-                                className="flex w-full mt-2 items-center justify-center underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            <Link
+                                href="/register"
+                                className="flex w-full mt-2 items-center justify-start underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                             >
                                 Belum memiliki akun?
                             </Link>
