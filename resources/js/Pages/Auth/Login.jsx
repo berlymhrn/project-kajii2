@@ -31,9 +31,7 @@ export default function Login() {
             errors.password = "Password harus diisi";
         } else if (password.trim().length > 255) {
             errors.password = "Password tidak boleh terlalu panjang";
-        } else if (
-            !/(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}/.test(password)
-        ) {
+        } else if (!/[A-Za-z\d@$!%*?&]{8,}/.test(password)) {
             errors.password = "Setidaknya 8 karakter dengan angka dan simbol";
         }
 
@@ -49,18 +47,17 @@ export default function Login() {
         if (validateForm()) {
             try {
                 const formData = {
-                    nama,
-                    username,
                     email,
-                    no_telp,
                     password,
                 };
 
-                const response = await DesaKajii.post(
-                    "/user/register",
-                    formData
-                );
-                console.log(response.data);
+                const response = await DesaKajii.post("/user/login", formData);
+                document.cookie = `token=${response.data.token};`;
+                // Jika message dari response success maka redirect ke halaman sebelumnya
+                if (response.data.message === "success") {
+                    // Redirect ke halaman sebelumnya
+                    window.history.back();
+                }
             } catch (error) {
                 console.error("Error submitting registeration", error);
             }
