@@ -33,7 +33,10 @@ function DetailHomestay() {
             return <CardTransSkeleton />;
         }
         const imageArray = detailHomestay.gambar.split(",");
-        const cleanedImages = imageArray.map((image) => image.trim());
+        const cleanedImages = imageArray.map(
+            (image) => "http://127.0.0.1:8088/" + image.trim()
+        );
+        console.log(cleanedImages);
         return <CarouselComponent images={cleanedImages} limit={5} />;
     };
 

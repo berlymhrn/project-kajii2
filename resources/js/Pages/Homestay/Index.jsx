@@ -4,7 +4,7 @@ import CustomButton from "@/Components/CustomButton";
 import MiniCardSkeleton from "@/Components/loading/MiniCardSkeleton";
 import DesaKajii from "@/services/DesaKajii";
 import Navbar4 from "@/Components/Navbar4";
-import Footer from "@/Components/Footer"; 
+import Footer from "@/Components/Footer";
 
 function Index() {
     const [homestay, setHomestay] = useState([]);
@@ -38,13 +38,14 @@ function Index() {
         return homestay.map((item) => {
             const imgUrls = item.gambar.split(",");
             const imageTrim = imgUrls[0].trim();
+            const imagePath = "http://127.0.0.1:8088/" + imageTrim;
 
             const hargaFormatted = item.harga.toLocaleString("id-ID");
             const hargaCurrency = `IDR ${hargaFormatted}`;
             return (
                 <CardAll
                     key={item.id_homestay}
-                    img={imageTrim}
+                    img={imagePath}
                     title={item.nama}
                     titlePosition={"justify-start"}
                     smallTitle={"Jl. lorem ipsum dolor sit amet"}
