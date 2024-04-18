@@ -5,7 +5,7 @@ import CardTransSkeleton from "@/Components/loading/CardTransSkeleton";
 import DesaKajii from "@/services/DesaKajii";
 import NoData from "../../../../public/assets/noData.png";
 import Navbar4 from "@/Components/Navbar4";
-import Footer from "@/Components/Footer"; 
+import Footer from "@/Components/Footer";
 
 
 function Index() {
@@ -41,6 +41,8 @@ function Index() {
             return news.map((item) => {
                 const imgUrls = item.gambar.split(",");
                 const imageTrim = imgUrls[0].trim();
+                const imagePath = "http://localhost:8088/" + imageTrim;
+
                 const dateParts = item.dibuat.split("-");
                 const formattedDate = `${dateParts[2]}-${
                     dateParts[1]
@@ -49,7 +51,7 @@ function Index() {
                 return (
                     <CardTransaksi
                         key={item.id_artikel}
-                        img={imageTrim}
+                        img={imagePath}
                         header={item.judul}
                         time={formattedDate}
                         title={item.deskripsi}

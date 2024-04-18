@@ -4,14 +4,14 @@ import DesaKajii from "@/services/DesaKajii";
 import TextSkeleton from "@/Components/loading/TextSkeleton";
 import TimelineSkeleton from "@/Components/loading/TimelineSkeleton";
 import Navbar4 from "@/Components/Navbar4";
-import Footer from "@/Components/Footer"; 
+import Footer from "@/Components/Footer";
 
 
 function Index() {
     const [profileDesc, setProfileDesc] = useState(""); //string kosong karena langsung mengambil deskripsi saja
     const [timeline, setTimeline] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -53,9 +53,9 @@ function Index() {
                 "07": "Juli",
                 "08": "Agustus",
                 "09": "September",
-                10: "Oktober",
-                11: "November",
-                12: "Desember",
+                "10": "Oktober",
+                "11": "November",
+                "12": "Desember",
             };
             const formattedDate = `${dateParts[2]} ${
                 bulan[dateParts[1]]
@@ -66,7 +66,7 @@ function Index() {
                     title={item.judul}
                     date={formattedDate}
                     description={item.deskripsi}
-                    imgSrc={item.gambar}
+                    imgSrc={'http://localhost:8088/'+item.gambar}
                 />
             );
         });

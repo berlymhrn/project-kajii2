@@ -47,42 +47,47 @@ function DetailNews() {
             ? `${dateParts[2]}-${dateParts[1]}-20${dateParts[0].slice(2)}`
             : "";
 
-            const renderRecomendation = () => {
-                const sortedRecomendation = [...recomendation].sort((a, b) => b.id_artikel - a.id_artikel); // mengurutkan array recomendasi berdasarkan id terbaru
-                const latestNewsList = sortedRecomendation.slice(0, 5);
-                return latestNewsList.map((latestNews) => {
-                    const imgUrls = latestNews.gambar.split(",");
-                    const imageTrim = imgUrls[0].trim();
-                    const dateParts = latestNews.dibuat.split("-");
-                    const formattedDate = `${dateParts[2]}-${dateParts[1]}-20${dateParts[0].slice(2)}`;
+    const renderRecomendation = () => {
+        const sortedRecomendation = [...recomendation].sort(
+            (a, b) => b.id_artikel - a.id_artikel
+        ); // mengurutkan array recomendasi berdasarkan id terbaru
+        const latestNewsList = sortedRecomendation.slice(0, 5);
+        return latestNewsList.map((latestNews) => {
+            const imgUrls = latestNews.gambar.split(",");
+            const imageTrim = imgUrls[0].trim();
+            const imagePath = "http://localhost:8088/" + imageTrim;
 
-                    return (
-                        <div key={latestNews.id_artikel}>
-                            <a
-                                className="group flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-400 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-gray-400"
-                                href={`/artikel/${latestNews.id_artikel}`}
-                            >
-                                <span className="block w-28 h-16 rounded-lg bg-gray-200 group-hover:bg-white/20">
-                                    <img
-                                        className="object-cover w-full h-full rounded-lg"
-                                        src={imageTrim}
-                                        alt="Image Description"
-                                    />
-                                </span>
-                                <span className="flex flex-col">
-                                    <span className="text-p16 font-medium text-gray-800">
-                                        {latestNews.judul}
-                                    </span>
-                                    <span className="text-p12 font-medium text-gray-500">
-                                        {formattedDate}
-                                    </span>
-                                </span>
-                            </a>
-                        </div>
-                    );
-                });
-            };
+            const dateParts = latestNews.dibuat.split("-");
+            const formattedDate = `${dateParts[2]}-${
+                dateParts[1]
+            }-20${dateParts[0].slice(2)}`;
 
+            return (
+                <div key={latestNews.id_artikel}>
+                    <a
+                        className="group flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-400 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-gray-400"
+                        href={`/artikel/${latestNews.id_artikel}`}
+                    >
+                        <span className="block w-28 h-16 rounded-lg bg-gray-200 group-hover:bg-white/20">
+                            <img
+                                className="object-cover w-full h-full rounded-lg"
+                                src={imagePath}
+                                alt="Image Description"
+                            />
+                        </span>
+                        <span className="flex flex-col">
+                            <span className="text-p16 font-medium text-gray-800">
+                                {latestNews.judul}
+                            </span>
+                            <span className="text-p12 font-medium text-gray-500">
+                                {formattedDate}
+                            </span>
+                        </span>
+                    </a>
+                </div>
+            );
+        });
+    };
 
     return (
         <div className="max-w-[85rem] sm:px-6 lg:px-8 mx-12 md:mx-20 ">
@@ -130,6 +135,7 @@ function DetailNews() {
                                                 <img
                                                     className="size-full absolute top-0 start-0 object-cover rounded-xl"
                                                     src={
+                                                        "http://127.0.0.1:8088/" +
                                                         detailNews.gambar.split(
                                                             ","
                                                         )[0]
@@ -148,6 +154,7 @@ function DetailNews() {
                                                 <img
                                                     className="size-full absolute top-0 start-0 object-cover rounded-xl"
                                                     src={
+                                                        "http://127.0.0.1:8088/" +
                                                         detailNews.gambar.split(
                                                             ","
                                                         )[1]
@@ -166,6 +173,7 @@ function DetailNews() {
                                             <img
                                                 className="size-full absolute top-0 start-0 object-cover rounded-xl "
                                                 src={
+                                                    "http://127.0.0.1:8088/" +
                                                     detailNews.gambar.split(
                                                         ","
                                                     )[2]

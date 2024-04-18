@@ -11,8 +11,10 @@ function KolamIkan() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const kolamIkanResponse = await DesaKajii.get("/kolam-ikan");
-                setKolamIkan(kolamIkanResponse.data.kolamIkan);
+                const kolamIkanResponse = await DesaKajii.get(
+                    "/katalog/kolam"
+                );
+                setKolamIkan(kolamIkanResponse.data.kolam);
 
                 setLoading(false);
             } catch (error) {
@@ -39,6 +41,7 @@ function KolamIkan() {
                 const imgUrls = item.gambar.split(",");
                 imageTrim = imgUrls[0].trim();
             }
+            const imagePath = "http://localhost:8088/" + imageTrim;
             const truncatedDescription =
                 item.deskripsi.length > 140
                     ? item.deskripsi.slice(0, 140) + "..."
@@ -47,7 +50,7 @@ function KolamIkan() {
                 <CardAll
                     key={item.id_kolam}
                     title={item.nama}
-                    img={imageTrim}
+                    img={imagePath}
                     titlePosition={"justify-center"}
                     smallTitle={truncatedDescription}
                     action={

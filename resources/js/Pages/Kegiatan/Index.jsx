@@ -4,7 +4,7 @@ import CustomButton from "@/Components/CustomButton";
 import DesaKajii from "@/services/DesaKajii";
 import MiniCardSkeleton from "@/Components/loading/MiniCardSkeleton";
 import Navbar4 from "@/Components/Navbar4";
-import Footer from "@/Components/Footer"; 
+import Footer from "@/Components/Footer";
 
 function Index() {
     const [kegiatans, setKegiatans] = useState([]);
@@ -37,12 +37,13 @@ function Index() {
         return kegiatans.map((item) => {
             const hargaFormatted = item.harga.toLocaleString("id-ID");
             const hargaCurrency = `IDR ${hargaFormatted}`;
+            const imagePath = "http://127.0.0.1:8088/" + item.gambar;
 
             return (
                 <CardActivity
                     key={item.id_kegiatan}
                     title={item.judul}
-                    image={item.gambar}
+                    image={imagePath}
                     price={hargaCurrency}
                     action={
                         <CustomButton

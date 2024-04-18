@@ -12,10 +12,9 @@ import DesaKajii from "@/services/DesaKajii";
 import MiniCardSkeleton from "@/Components/loading/MiniCardSkeleton";
 import { Link } from "@inertiajs/react";
 import Navbar4 from "@/Components/Navbar4";
-import Footer from "@/Components/Footer";  
+import Footer from "@/Components/Footer";
 
 function Index() {
-
     const [slideIndex, setSlideIndex] = useState(0);
     const settings = {
         dots: true,
@@ -53,12 +52,14 @@ function Index() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const ikanHiasResponse = await DesaKajii.get("/ikan-hias");
-                setIkanHias(ikanHiasResponse.data.ikanHias);
-                setIkanTerbaik(ikanHiasResponse.data.ikanHias);
+                const ikanHiasResponse = await DesaKajii.get(
+                    "/katalog/ikan-hias"
+                );
+                setIkanHias(ikanHiasResponse.data.ikanhias);
+                setIkanTerbaik(ikanHiasResponse.data.ikanhias);
 
-                const kolamIkanResponse = await DesaKajii.get("/kolam-ikan");
-                setKolamIkan(kolamIkanResponse.data.kolamIkan);
+                const kolamIkanResponse = await DesaKajii.get("/katalog/kolam");
+                setKolamIkan(kolamIkanResponse.data.kolam);
 
                 setLoading(false);
             } catch (error) {
@@ -82,6 +83,7 @@ function Index() {
         return ikanHias.slice(0, 4).map((item) => {
             const imgUrls = item.gambar.split(",");
             const imageTrim = imgUrls[0].trim();
+            const imagePath = "http://localhost:8088/" + imageTrim;
 
             const hargaFormatted = item.harga.toLocaleString("id-ID");
             const hargaCurrency = `IDR ${hargaFormatted}`;
@@ -90,7 +92,7 @@ function Index() {
                 <CardActivity
                     key={item.id_ikan_hias}
                     title={item.judul}
-                    image={imageTrim}
+                    image={imagePath}
                     price={hargaCurrency}
                     action={
                         <CustomButton
@@ -121,6 +123,7 @@ function Index() {
                 const imgUrls = item.gambar.split(",");
                 imageTrim = imgUrls[0].trim();
             }
+            const imagePath = "http://localhost:8088/" + imageTrim;
             const truncatedDescription =
                 item.deskripsi.length > 140
                     ? item.deskripsi.slice(0, 140) + "..."
@@ -129,7 +132,7 @@ function Index() {
                 <CardAll
                     key={item.id_kolam}
                     title={item.nama}
-                    img={imageTrim}
+                    img={imagePath}
                     titlePosition={"justify-center"}
                     smallTitle={truncatedDescription}
                     action={
@@ -146,22 +149,29 @@ function Index() {
     };
 
     const renderIkanTerbaik = () =>
-        ikanTerbaik.map((item, index) => (
-            <div
-                key={index}
-                className={`slide ${index === slideIndex ? "active" : ""} ${
-                    index === slideIndex
-                        ? "opacity-100 scale-100"
-                        : "opacity-40 scale-50"
-                }`}
-            >
-                <img
-                    src={item.gambar}
-                    alt={`Slide ${index + 1}`}
-                    className="w-full h-72 object-cover rounded-lg"
-                />
-            </div>
-        ));
+        ikanTerbaik.map((item, index) => {
+            const imageUrls = item.gambar.split(",");
+            const imageTrim = imageUrls[0].trim();
+            const imagePath = "http://localhost:8088/" + imageTrim;
+            console.log(item.id_ikan_hias);
+            console.log(index);
+            return (
+                <div
+                    key={index}
+                    className={`slide ${index === slideIndex ? "active" : ""} ${
+                        index === slideIndex
+                            ? "opacity-100 scale-100"
+                            : "opacity-40 scale-50"
+                    }`}
+                >
+                    <img
+                        src={imagePath}
+                        alt={`Slide ${index + 1}`}
+                        className="w-full h-72 object-cover rounded-lg"
+                    />
+                </div>
+            );
+        });
 
     return (
         <div>

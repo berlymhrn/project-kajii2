@@ -11,8 +11,10 @@ function IkanHias() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const ikanHiasResponse = await DesaKajii.get("/ikan-hias");
-                setIkanHias(ikanHiasResponse.data.ikanHias);
+                const ikanHiasResponse = await DesaKajii.get(
+                    "/katalog/ikan-hias"
+                );
+                setIkanHias(ikanHiasResponse.data.ikanhias);
 
                 setLoading(false);
             } catch (error) {
@@ -36,6 +38,7 @@ function IkanHias() {
         return ikanHias.map((item) => {
             const imgUrls = item.gambar.split(",");
             const imageTrim = imgUrls[0].trim();
+            const imagePath = "http://localhost:8088/" + imageTrim;
 
             const hargaFormatted = item.harga.toLocaleString("id-ID");
             const hargaCurrency = `IDR ${hargaFormatted}`;
@@ -44,7 +47,7 @@ function IkanHias() {
                 <CardActivity
                     key={item.id_ikan_hias}
                     title={item.judul}
-                    image={imageTrim}
+                    image={imagePath}
                     price={hargaCurrency}
                     action={
                         <CustomButton

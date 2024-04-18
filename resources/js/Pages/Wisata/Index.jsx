@@ -5,7 +5,7 @@ import Feature from "@/Components/ListFeature";
 import MiniCardSkeleton from "@/Components/loading/MiniCardSkeleton";
 import DesaKajii from "@/services/DesaKajii";
 import Navbar4 from "@/Components/Navbar4";
-import Footer from "@/Components/Footer"; 
+import Footer from "@/Components/Footer";
 
 function Index() {
     const [paketWisata, setPaketWisata] = useState([]);
@@ -50,6 +50,7 @@ function Index() {
                 const imgUrls = item.gambar.split(",");
                 imageTrim = imgUrls[0].trim();
             }
+            const imagePath = "http://127.0.0.1:8088/" + imageTrim;
 
             return (
                 <CardAll
@@ -58,7 +59,7 @@ function Index() {
                     titlePosition={"justify-center"}
                     smallTitlePosition={"justify-center"}
                     smallTitle={item.waktu}
-                    img={imageTrim}
+                    img={imagePath}
                     capt={"Fasilitas"}
                     feature={<Feature featureTitle={fasilitasArray} />}
                     price={hargaCurrency}

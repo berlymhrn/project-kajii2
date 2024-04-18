@@ -16,7 +16,7 @@ function DetailIkanHias() {
         if (!id) return;
         const fetchData = async () => {
             try {
-                const response = await DesaKajii.get(`/ikan-hias/${id}`);
+                const response = await DesaKajii.get(`/katalog/ikan-hias${id}`);
                 setDetailIkanHias(response.data);
                 setLoading(false);
             } catch (error) {
@@ -32,7 +32,7 @@ function DetailIkanHias() {
             return <CardTransSkeleton />;
         }
         const imageArray = detailIkanHias.gambar.split(",");
-        const cleanedImages = imageArray.map((image) => image.trim());
+        const cleanedImages = imageArray.map((image) => 'http://127.0.0.1:8088/'+image.trim());
         return <CarouselComponent images={cleanedImages} limit={5} />;
     };
 
@@ -41,7 +41,7 @@ function DetailIkanHias() {
             return <TextSkeleton />;
         }
         const hargaFormatted = detailIkanHias.harga.toLocaleString("id-ID");
-        const hargaCurrency = `IDR ${hargaFormatted}/malam`;
+        const hargaCurrency = `IDR ${hargaFormatted}`;
         return hargaCurrency;
     };
 
