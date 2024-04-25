@@ -55,8 +55,12 @@ export default function Login() {
                 document.cookie = `token=${response.data.token};`;
                 // Jika message dari response success maka redirect ke halaman sebelumnya
                 if (response.data.message === "success") {
-                    // Redirect ke halaman sebelumnya
-                    window.history.back();
+                    var previousPage = document.referrer;
+                    if (previousPage.endsWith("/register")) {
+                        window.location.href = "/";
+                    } else {
+                        window.history.back();
+                    }
                 }
             } catch (error) {
                 console.error("Error submitting registeration", error);
