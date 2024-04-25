@@ -153,8 +153,6 @@ function Index() {
             const imageUrls = item.gambar.split(",");
             const imageTrim = imageUrls[0].trim();
             const imagePath = "http://localhost:8088/" + imageTrim;
-            console.log(item.id_ikan_hias);
-            console.log(index);
             return (
                 <div
                     key={index}
@@ -177,7 +175,7 @@ function Index() {
         <div>
             <Navbar4 />
 
-            <div className="mx-12 md:mx-20">
+            <div>
                 <h1 className="font-bold text-h3 md:text-h1 mt-20 text-center mb-12 md:mb-16">
                     Ikan Hias Terbaik
                 </h1>
@@ -185,38 +183,34 @@ function Index() {
                     <Slider {...settings}>{renderIkanTerbaik()}</Slider>
                 </div>
             </div>
-            <div className="mb-20">
-                <h2 className="font-bold text-h5 md:text-h2 mt-20 mb-3 md:mb-8">
-                    Semua Ikan Hias
-                </h2>
-                <div className="flex flex-wrap gap-3 mb-10">
-                    {renderIkanHias()}
+            <div className="mx-12 md:mx-20">
+                <div className="mb-20">
+                    <h2 className="font-bold text-h5 md:text-h2 mt-20 mb-3 md:mb-8">
+                        Semua Ikan Hias
+                    </h2>
+                    <div className="flex flex-wrap gap-3 mb-5 ">
+                        {renderIkanHias()}
+                    </div>
+                    <Link href="/ikan-hias-all">
+                        <h5 className="underline text-2xl tracking-tight font-bold text-primaryColor">
+                            Lihat Lainnya
+                        </h5>
+                    </Link>
                 </div>
-                <Link href="/ikan-hias-all">
-                    <h5 className="underline text-2xl tracking-tight font-bold text-primaryColor">
-                        Lihat Lainnya
-                    </h5>
-                </Link>
-            </div>
 
-            <div className="mb-20">
-                <h2 className="font-bold text-h5 md:text-h2 mt-20 mb-3 md:mb-8">
-                    Kolam Ikan
-                </h2>
-                <div className="flex flex-wrap gap-3 mb-10">
-                    {renderKolamIkan()}
+                <div className="mb-20">
+                    <h2 className="font-bold text-h5 md:text-h2 mt-20 mb-3 md:mb-8">
+                        Kolam Ikan
+                    </h2>
+                    <div className="flex flex-wrap gap-3 mb-5 ">
+                        {renderKolamIkan()}
+                    </div>
+                    <Link href="/kolam-ikan-all">
+                        <h5 className="underline text-2xl tracking-tight font-bold text-primaryColor">
+                            Lihat Lainnya
+                        </h5>
+                    </Link>
                 </div>
-                <Link href="/kolam-ikan-all">
-                    <h5 className="underline text-2xl tracking-tight font-bold text-primaryColor">
-                        Lihat Lainnya
-                    </h5>
-                </Link>
-            </div>
-
-            <div className="mb-20">
-                <h2 className="font-bold text-h5 md:text-h2 mt-20 mb-3 md:mb-8">
-                    Lembaga Kerja Sama
-                </h2>
             </div>
             <Footer />
         </div>

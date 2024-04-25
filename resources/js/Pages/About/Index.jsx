@@ -43,7 +43,7 @@ function Index() {
         }
         return timeline.map((item) => {
             const dateParts = item.tanggal.split("-");
-            const bulan = {
+            const month = {
                 "01": "Januari",
                 "02": "Februari",
                 "03": "Maret",
@@ -58,15 +58,16 @@ function Index() {
                 "12": "Desember",
             };
             const formattedDate = `${dateParts[2]} ${
-                bulan[dateParts[1]]
+                month[dateParts[1]]
             } 20${dateParts[0].slice(2)}`;
+            const imagePath = "http://127.0.0.1:8088/" + item.gambar;
             return (
                 <TimelineComponent
                     key={item.id_timeline}
                     title={item.judul}
                     date={formattedDate}
                     description={item.deskripsi}
-                    imgSrc={'http://localhost:8088/'+item.gambar}
+                    imgSrc={imagePath}
                 />
             );
         });

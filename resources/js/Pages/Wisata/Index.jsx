@@ -80,7 +80,7 @@ function Index() {
             <Navbar4 />
 
             <div className="mx-12 md:mx-20 ">
-                <h1 className="font-bold text-h2 md:text-h1 mt-20 flex justify-center mb-12 md:mb-16">
+                <h1 className="font-bold text-h2 md:text-h1 mt-20 text-center mb-12 md:mb-16">
                     PAKET WISATA
                 </h1>
                 <div className="flex flex-wrap gap-3">

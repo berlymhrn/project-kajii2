@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Head } from "@inertiajs/react";
+import { Link } from "@inertiajs/react";
 import DesaKajii from "@/services/DesaKajii";
 import heroSection from "../../../../public/assets/heroSection.png";
 import CustomButton from "@/Components/CustomButton";
@@ -22,8 +23,7 @@ import MiniCardSkeleton from "@/Components/loading/MiniCardSkeleton";
 import CardTransSkeleton from "@/Components/loading/CardTransSkeleton";
 import FaqSkeleton from "@/Components/loading/FaqSkeleton";
 import Navbar4 from "@/Components/Navbar4";
-import Footer from "@/Components/Footer";            
-
+import Footer from "@/Components/Footer";
 
 function Index() {
     const settings = {
@@ -60,7 +60,6 @@ function Index() {
     const [review, setReview] = useState([]);
     const [faq, setFaq] = useState([]);
     const [kegiatan, setKegiatan] = useState([]);
-    const [hiburan, setHiburan] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -68,8 +67,8 @@ function Index() {
                 const profileDescResponse = await DesaKajii.get("/profile");
                 setProfileDesc(profileDescResponse.data.profile.deskripsi);
 
-                const promoResponse = await DesaKajii.get("/promo");
-                setPromo(promoResponse.data.promo);
+                // const promoResponse = await DesaKajii.get("/promo");
+                // setPromo(promoResponse.data.promo);
 
                 const paketWisataResponse = await DesaKajii.get(
                     "/paket-wisata"
@@ -88,9 +87,6 @@ function Index() {
                 const kegiatanResponse = await DesaKajii.get("/kegiatan");
                 setKegiatan(kegiatanResponse.data.kegiatan);
 
-                const hiburanResponse = await DesaKajii.get("/hiburan");
-                setHiburan(hiburanResponse.data.hiburan);
-
                 setLoading(false);
             } catch (error) {
                 console.log(error);
@@ -100,13 +96,13 @@ function Index() {
         fetchData();
     }, []);
 
-    const renderPromo = () => {
-        if (loading) {
-            return <CardTransSkeleton />;
-        }
-        const images = promo.map((item) => item.gambar);
-        return <CarouselComponent images={images} limit={3} />;
-    };
+    // const renderPromo = () => {
+    //     if (loading) {
+    //         return <CardTransSkeleton />;
+    //     }
+    //     const images = promo.map((item) => item.gambar);
+    //     return <CarouselComponent images={images} limit={3} />;
+    // };
 
     const renderPaketWisata = () => {
         if (loading) {
@@ -130,6 +126,7 @@ function Index() {
                 const imgUrls = item.gambar.split(",");
                 imageTrim = imgUrls[0].trim();
             }
+            const imagePath = "http://127.0.0.1:8088/" + imageTrim;
 
             return (
                 <CardAll
@@ -138,7 +135,7 @@ function Index() {
                     titlePosition={"justify-center"}
                     smallTitlePosition={"justify-center"}
                     smallTitle={item.waktu}
-                    img={imageTrim}
+                    img={imagePath}
                     capt={"Fasilitas"}
                     feature={<Feature featureTitle={fasilitasArray} />}
                     price={hargaCurrency}
@@ -165,16 +162,17 @@ function Index() {
                 </>
             );
         }
-        return homestay.map((item) => {
+        return homestay.slice(0, 4).map((item) => {
             const imgUrls = item.gambar.split(",");
             const imageTrim = imgUrls[0].trim();
+            const imagePath = "http://127.0.0.1:8088/" + imageTrim;
 
             const hargaFormatted = item.harga.toLocaleString("id-ID");
             const hargaCurrency = `IDR ${hargaFormatted}`;
             return (
                 <CardAll
                     key={item.id_homestay}
-                    img={imageTrim}
+                    img={imagePath}
                     title={item.nama}
                     titlePosition={"justify-start"}
                     smallTitle={"Jl. lorem ipsum dolor sit amet"}
@@ -202,46 +200,16 @@ function Index() {
                 </>
             );
         }
-        return kegiatan.map((item) => {
+        return kegiatan.slice(0, 4).map((item) => {
             const hargaFormatted = item.harga.toLocaleString("id-ID");
             const hargaCurrency = `IDR ${hargaFormatted}`;
+            const imagePath = "http://127.0.0.1:8088/" + item.gambar;
 
             return (
                 <CardActivity
                     key={item.id_kegiatan}
                     title={item.judul}
-                    image={item.gambar}
-                    price={hargaCurrency}
-                    action={
-                        <CustomButton
-                            text={"Pesan Sekarang"}
-                            bgColor={"bg-red-600"}
-                            font={"font-semibold"}
-                        />
-                    }
-                />
-            );
-        });
-    };
-
-    const renderHiburan = () => {
-        if (loading) {
-            return (
-                <>
-                    {Array.from({ length: 4 }, (_, index) => (
-                        <MiniCardSkeleton key={index} />
-                    ))}
-                </>
-            );
-        }
-        return hiburan.map((item) => {
-            const hargaFormatted = item.harga.toLocaleString("id-ID");
-            const hargaCurrency = `IDR ${hargaFormatted}`;
-            return (
-                <CardActivity
-                    key={item.id_hiburan}
-                    title={item.judul}
-                    image={item.gambar}
+                    image={imagePath}
                     price={hargaCurrency}
                     action={
                         <CustomButton
@@ -256,15 +224,19 @@ function Index() {
     };
 
     const renderReview = () => {
-        return review.map((item, index) => (
-            <div key={index} className="pb-2">
-                <Review
-                    img={item.gambar}
-                    name={item.nama}
-                    review={item.ulasan}
-                />
-            </div>
-        ));
+        return review.map((item, index) => {
+            const imagePath = "http://127.0.0.1:8088/" + item.profil;
+            return (
+                <div key={index} className="pb-2">
+                    <Review
+                        key={item.id_ulasan}
+                        img={imagePath}
+                        name={item.nama}
+                        review={item.ulasan}
+                    />
+                </div>
+            );
+        });
     };
 
     const renderFaq = () => {
@@ -353,12 +325,12 @@ function Index() {
                     />
                 </div>
 
-                <div className="mb-20 md:mb-32">
+                {/* <div className="mb-20 md:mb-32">
                     <h2 className="text-h5 md:text-h2 font-bold mb-3 md:mb-8">
                         Hanya Untuk Kamu!
                     </h2>
                     {renderPromo()}
-                </div>
+                </div> */}
 
                 <div className="mb-20 md:mb-32">
                     <h2 className="text-h5 md:text-h2 font-bold mb-3 md:mb-8">
@@ -366,15 +338,11 @@ function Index() {
                     </h2>
                     <div className="flex flex-wrap gap-3">
                         {renderKegiatan()}
-                    </div>
-                </div>
-
-                <div className="mb-20 md:mb-32">
-                    <h2 className="text-h5 md:text-h2 font-bold mb-3 md:mb-8">
-                        Pilihan Hiburan
-                    </h2>
-                    <div className="flex flex-wrap gap-3">
-                        {renderHiburan()}
+                        <Link href="/kegiatan">
+                            <h5 className="underline text-2xl tracking-tight font-bold text-primaryColor">
+                                Lihat Lainnya
+                            </h5>
+                        </Link>
                     </div>
                 </div>
 
@@ -384,6 +352,11 @@ function Index() {
                     </h2>
                     <div className="flex flex-wrap gap-3">
                         {renderPaketWisata()}
+                        <Link href="/paket-wisata">
+                            <h5 className="underline text-2xl tracking-tight font-bold text-primaryColor">
+                                Lihat Lainnya
+                            </h5>
+                        </Link>
                     </div>
                 </div>
 
@@ -393,6 +366,11 @@ function Index() {
                     </h2>
                     <div className="flex flex-wrap gap-3">
                         {renderHomestay()}
+                        <Link href="/homestay">
+                            <h5 className="underline text-2xl tracking-tight font-bold text-primaryColor">
+                                Lihat Lainnya
+                            </h5>
+                        </Link>
                     </div>
                 </div>
 
@@ -409,7 +387,6 @@ function Index() {
                     </h2>
                     {renderFaq()}
                 </div>
-                
             </div>
             <Footer />
         </div>

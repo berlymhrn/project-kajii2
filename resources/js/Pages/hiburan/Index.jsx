@@ -58,7 +58,7 @@ function Index() {
         <div>
             <Navbar4 />
             <div className="mx-12 md:mx-20">
-                <h1 className="font-bold text-h2 md:text-h1 mt-20 flex justify-center mb-12 md:mb-16">
+                <h1 className="font-bold text-h2 md:text-h1 mt-20 text-center mb-12 md:mb-16">
                     Hiburan
                 </h1>
                 <div className="flex flex-wrap gap-3">{renderHiburan()}</div>
