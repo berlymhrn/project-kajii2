@@ -25,6 +25,7 @@ import FaqSkeleton from "@/Components/loading/FaqSkeleton";
 import Navbar4 from "@/Components/Navbar4";
 import Footer from "@/Components/Footer";
 
+
 function Index() {
     const settings = {
         dots: true,
@@ -271,7 +272,7 @@ function Index() {
                 <title>Home</title>
                 <meta name="" content="" />
             </Head>
-            <Navbar4 />
+            <Navbar4/>
             <a
                 href="https://wa.me/6288225208880"
                 className="fixed bottom-10 right-10 bg-primaryColor rounded-full p-4 z-10"

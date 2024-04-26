@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import CustomButton from "@/Components/CustomButton";
 import { Link } from "@inertiajs/react";
 import { IconEye, IconEyeOff } from "@tabler/icons-react";
 import DesaKajii from "@/services/DesaKajii";
+import Alert from "@/Components/Alert";
+
 
 export default function Register() {
     const [nama, setNama] = useState("");
@@ -14,6 +16,7 @@ export default function Register() {
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [errors, setErrors] = useState({});
+    const [registrationSuccess, setRegistrationSuccess] = useState(false);
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -63,7 +66,6 @@ export default function Register() {
 
         return Object.keys(errors).length === 0;
     };
-
     const handleButton = async (e) => {
         e.preventDefault();
 
@@ -83,12 +85,15 @@ export default function Register() {
                 );
 
                 console.log(response.data);
+                setRegistrationSuccess(true);
+                window.location.href = "/login";
+
             } catch (error) {
                 if (error.response) {
                     const { data, status } = error.response;
 
                     if (
-                        status === 422 &&
+                        status === 400 &&
                         data.info === "Email yang anda masukkan sudah ada"
                     ) {
                         setErrors({ email: data.info });
@@ -110,6 +115,11 @@ export default function Register() {
 
     return (
         <div className="min-h-screen flex flex-col sm:justify-center items-center p-6 bg-gray-100">
+            <div className="flex justify-end">
+                {registrationSuccess && (
+                    <Alert type="success" message="Registrasi berhasil!" />
+                )}
+            </div>
             <div className="w-full sm:max-w-md mt-0 px-6 py-6 bg-white shadow-md overflow-hidden sm:rounded-lg">
                 <div>
                     <form>

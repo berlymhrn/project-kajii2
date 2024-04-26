@@ -3,10 +3,14 @@ import { IconBellFilled, IconUserCircle, IconWorld } from "@tabler/icons-react";
 import logo from "../../../public/assets/logo.png";
 import { Link } from "@inertiajs/react";
 
+const specificCookie = document.cookie
+      .split('; ')
+      .find(row => row.startsWith('token='));
+
 const Dropdown = ({ isOpen, toggle, children, className }) => (
     <div
         className={`${
-            isOpen ? "block" : "hidden"
+            isOpen ? "fixed" : "hidden"
         } z-[900] font-normal bg-white divide-y absolute top-24 divide-gray-100 rounded-lg shadow ${className}`}
     >
         <ul className="py-2 text-sm text-gray-700">{children}</ul>
@@ -29,7 +33,6 @@ const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [openDropdown, setOpenDropdown] = useState(null);
     const [isAccountDropdownOpen, setIsAccountDropdownOpen] = useState(false);
-    
 
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -41,8 +44,28 @@ const Navbar = () => {
         setIsAccountDropdownOpen(!isAccountDropdownOpen);
     };
 
+    const [openDdown, setOpenDdown] = useState(false);
+    const [openDdown2, setOpenDdown2] = useState(false);
+
+    const toggleDdownEnter = () => {
+        setOpenDdown(true);
+        setOpenDdown2(false);
+    };
+
+    const toggleDdownLeave = () => {
+        setOpenDdown(false);
+    };
+
+    const toggleDdown2Enter = () => {
+        setOpenDdown2(true);
+        setOpenDdown(false);
+    };
+    const toggleDdown2Leave = () => {
+        setOpenDdown2(false);
+    };
+
     return (
-        <nav className="bg-primaryColor border-gray-200 p-5">
+        <nav className="bg-primaryColor border-gray-200 px-5 md:h-300 ">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <div>
                     <a
@@ -53,12 +76,13 @@ const Navbar = () => {
                     </a>
                 </div>
                 <div className="hidden md:block">
-                    <ul className="flex flex-col font-medium p-4 mt-4 border border-t-0 rounded-t-none border-red-100 rounded-lg bg-primaryColor md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-primaryColor">
+                    <ul className="flex flex-col font-medium p-2 md:p-4 mt-4 border border-t-0 rounded-t-none border-red-100 rounded-lg bg-primaryColor md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-primaryColor">
                         <li>
                             <Link
                                 href="/"
                                 className="block py-2 px-3 text-white focus:bg-white rounded-md focus:text-black dark:bg-primaryColor text-white "
                                 aria-current="page"
+                                style={{ fontSize: "1.2rem" }}
                             >
                                 Home
                             </Link>
@@ -68,85 +92,126 @@ const Navbar = () => {
                                 href="/ikan-hias"
                                 className="block py-2 px-3 text-white focus:bg-white rounded-md focus:text-black dark:bg-primaryColor text-white "
                                 aria-current="page"
+                                style={{ fontSize: "1.2rem" }}
                             >
                                 Ikan Hias
                             </Link>
                         </li>
-                        <li className="relative ">
+                        <li className="relative">
                             <button
-                                onClick={() => toggleDropdown("dropdown2")}
-                                className="flex items-center justify-between w-full py-2 px-3 text-white rounded md:hover:bg-transparent md:border-0 md:w-auto"
+                                className="flex w-full px-4 py-2 font-medium text-white rounded-md outline-none focus:outline-none "
+                                style={{ fontSize: "1.2rem" }}
+                                onMouseEnter={toggleDdownEnter}
+                                onClick={toggleDdownEnter}
                             >
                                 Layanan
-                                <svg
-                                    className="w-2.5 h-2.5 ms-2.5"
-                                    aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 10 6"
-                                >
-                                    <path
-                                        stroke="currentColor"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="m1 1 4 4 4-4"
-                                    />
-                                </svg>
+                                <div className="mt-2">
+                                    <svg
+                                        className="w-2.5 h-2.5 ms-2.5"
+                                        aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 10 6"
+                                    >
+                                        <path
+                                            stroke="currentColor"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="m1 1 4 4 4-4"
+                                        />
+                                    </svg>
+                                </div>
                             </button>
-                            <Dropdown
-                                isOpen={openDropdown === "dropdown2"}
-                                toggle={() => toggleDropdown("dropdown2")}
-                                className="absolute top-full right-0 left-0 sm:static sm:left-auto sm:right-auto border border-gray-600 rounded-md  "
-                            >
-                                <Link href="/kegiatan">
-                                    <DropdownItem>Kegiatan</DropdownItem>
-                                </Link>
-                                <Link href="/homestay">
-                                    <DropdownItem>Homestay</DropdownItem>
-                                </Link>
-                                <Link href="/paket-wisata">
-                                    <DropdownItem>Paket Wisata</DropdownItem>
-                                </Link>
-                            </Dropdown>
+                            {openDdown && (
+                                <div
+                                    className="right-0 px-1 py-1 mt-1 bg-white rounded-md shadow lg:absolute z-10"
+                                    onMouseEnter={toggleDdownEnter}
+                                    onMouseLeave={toggleDdownLeave}
+                                >
+                                    <ul className="space-y-2 lg:w-48">
+                                        <li>
+                                            <a
+                                                href="/kegiatan"
+                                                className="flex p-2 font-medium text-gray-600 rounded-md hover:bg-gray-100 hover:text-black"
+                                            >
+                                                Kegiatan
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="/homestay"
+                                                className="flex p-2 font-medium text-gray-600 rounded-md hover:bg-gray-100 hover:text-black"
+                                            >
+                                                Homestay
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="/paket-wisata"
+                                                className="flex p-2 font-medium text-gray-600 rounded-md hover:bg-gray-100 hover:text-black"
+                                            >
+                                                Paket Wisata
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            )}
                         </li>
 
-                        <li className="relative ">
+                        <li className="relative">
                             <button
-                                onClick={() => toggleDropdown("dropdown3")}
-                                className="flex items-center justify-between w-full py-2 px-3 text-white rounded md:hover:bg-transparent md:border-0 md:w-auto"
+                                className="flex w-full px-4 py-2 font-medium text-white rounded-md outline-none focus:outline-none "
+                                style={{ fontSize: "1.2rem" }}
+                                onMouseEnter={toggleDdown2Enter}
+                                onClick={toggleDdown2Enter}
                             >
                                 Informasi
-                                <svg
-                                    className="w-2.5 h-2.5 ms-2.5"
-                                    aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 10 6"
-                                >
-                                    <path
-                                        stroke="currentColor"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="m1 1 4 4 4-4"
-                                    />
-                                </svg>
+                                <div className="mt-2">
+                                    <svg
+                                        className="w-2.5 h-2.5 ms-2.5"
+                                        aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 10 6"
+                                    >
+                                        <path
+                                            stroke="currentColor"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="m1 1 4 4 4-4"
+                                        />
+                                    </svg>
+                                </div>
                             </button>
-                            <Dropdown
-                                isOpen={openDropdown === "dropdown3"}
-                                toggle={() => toggleDropdown("dropdown3")}
-                                className="absolute top-full right-0 left-0 sm:static sm:left-auto sm:right-auto border border-gray-600 rounded-md  "
-                            >
-                                <Link href="/artikel">
-                                    <DropdownItem>
-                                        Berita & Artikel
-                                    </DropdownItem>
-                                </Link>
-                                <Link href="/about">
-                                    <DropdownItem>Tentang Kami</DropdownItem>
-                                </Link>
-                            </Dropdown>
+                            {openDdown2 && (
+                                <div
+                                    className="right-0 px-2 py-1 mt-1 bg-white rounded-md shadow lg:absolute z-10"
+                                    onMouseEnter={toggleDdown2Enter}
+                                    onMouseLeave={toggleDdown2Leave}
+                                >
+                                    <ul className="space-y-2 lg:w-48">
+                                        <li>
+                                            <a
+                                                href="/artikel"
+                                                className="flex p-2 font-medium text-gray-600 rounded-md hover:bg-gray-100 hover:text-black"
+                                            >
+                                                Berita & Artikel
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="/about"
+                                                className="flex p-2 font-medium text-gray-600 rounded-md hover:bg-gray-100 hover:text-black"
+                                            >
+                                                Tentang Kami
+                                            </a>
+                                        </li>
+                                       
+                                    </ul>
+                                </div>
+                            )}
                         </li>
                     </ul>
                 </div>
@@ -190,7 +255,7 @@ const Navbar = () => {
                             <span className="sr-only">Open user menu</span>
                         </button>
 
-                        {/* <Dropdown
+                        <Dropdown
                             isOpen={isAccountDropdownOpen}
                             toggle={toggleAccountDropdown}
                             className="right-10 md:right-48 top-24"
@@ -201,8 +266,16 @@ const Navbar = () => {
                                     zaza123@gmail.com
                                 </div>
                             </div>
+                            <Link href="/register">
+                                <DropdownItem>Regristasi</DropdownItem>
+                            </Link>
+                            <Link href="/login">
+                                <DropdownItem>Login</DropdownItem>
+                            </Link>
                             <Link href="#">
-                                <DropdownItem>Update Data Personal</DropdownItem>
+                                <DropdownItem>
+                                    Update Data Personal
+                                </DropdownItem>
                             </Link>
                             <Link href="/account/history">
                                 <DropdownItem>Riwayat Transaksi</DropdownItem>
@@ -210,7 +283,7 @@ const Navbar = () => {
                             <Link href="#">
                                 <DropdownItem>Log out</DropdownItem>
                             </Link>
-                        </Dropdown> */}
+                        </Dropdown>
                     </div>
                 </div>
 
@@ -219,9 +292,9 @@ const Navbar = () => {
                 <div
                     className={`${
                         isMenuOpen ? "block" : "hidden"
-                    } md:hidden w-full absolute left-0 right-0 top-24 z-50 border border-gray-300 rounded-md`}
+                    } md:hidden w-full absolute left-0 right-0 top-24 z-50 borderrounded-md p-2 md:p-4`}
                 >
-                    <ul className="flex flex-col font-medium p-4 mt-4 border border-t-0 rounded-t-none border-red-100 rounded-lg bg-primaryColor md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-blue-600">
+                    <ul className="flex flex-col font-medium p-4 mt-4 border border-red-100 rounded-lg bg-primaryColor md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-blue-600">
                         <li>
                             <Link
                                 href="/"
@@ -241,81 +314,119 @@ const Navbar = () => {
                             </Link>
                         </li>
 
-                        <li className="relative ">
+                        <li className="relative">
                             <button
-                                onClick={() => toggleDropdown("dropdown2")}
-                                className="flex items-center justify-between w-full py-2 px-3 text-white rounded md:hover:bg-transparent md:border-0 md:w-auto"
+                                className="flex w-full px-4 py-2 font-medium text-white rounded-md outline-none focus:outline-none "
+                                style={{ fontSize: "1.2rem" }}
+                                onMouseEnter={toggleDdownEnter}
+                                onClick={toggleDdownEnter}
                             >
                                 Layanan
-                                <svg
-                                    className="w-2.5 h-2.5 ms-2.5"
-                                    aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 10 6"
-                                >
-                                    <path
-                                        stroke="currentColor"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="m1 1 4 4 4-4"
-                                    />
-                                </svg>
+                                <div className="mt-2">
+                                    <svg
+                                        className="w-2.5 h-2.5 ms-2.5"
+                                        aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 10 6"
+                                    >
+                                        <path
+                                            stroke="currentColor"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="m1 1 4 4 4-4"
+                                        />
+                                    </svg>
+                                </div>
                             </button>
-                            <Dropdown
-                                isOpen={openDropdown === "dropdown2"}
-                                toggle={() => toggleDropdown("dropdown2")}
-                                className="absolute top-full right-0 left-0 sm:static sm:left-auto sm:right-auto border border-gray-600 rounded-md  "
-                            >
-                                <Link href="/kegiatan">
-                                    <DropdownItem>Kegiatan</DropdownItem>
-                                </Link>
-                                <Link href="/homestay">
-                                    <DropdownItem>Homestay</DropdownItem>
-                                </Link>
-                                <Link href="/paket-wisata">
-                                    <DropdownItem>Paket Wisata</DropdownItem>
-                                </Link>
-                            </Dropdown>
+                            {openDdown && (
+                                <div
+                                    className="right-0 px-1 py-1 mt-1 bg-white rounded-md shadow lg:absolute z-10"
+                                    onMouseEnter={toggleDdownEnter}
+                                    onMouseLeave={toggleDdownLeave}
+                                >
+                                    <ul className="space-y-2 lg:w-48">
+                                        <li>
+                                            <a
+                                                href="/kegiatan"
+                                                className="flex p-2 font-medium text-gray-600 rounded-md hover:bg-gray-100 hover:text-black"
+                                            >
+                                                Kegiatan
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="/homestay"
+                                                className="flex p-2 font-medium text-gray-600 rounded-md hover:bg-gray-100 hover:text-black"
+                                            >
+                                                Homestay
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="/paket-wisata"
+                                                className="flex p-2 font-medium text-gray-600 rounded-md hover:bg-gray-100 hover:text-black"
+                                            >
+                                                Paket Wisata
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            )}
                         </li>
-
-                        <li className="relative ">
+                        <li className="relative">
                             <button
-                                onClick={() => toggleDropdown("dropdown3")}
-                                className="flex items-center justify-between w-full py-2 px-3 text-white rounded md:hover:bg-transparent md:border-0 md:w-auto"
+                                className="flex w-full px-4 py-2 font-medium text-white rounded-md outline-none focus:outline-none "
+                                style={{ fontSize: "1.2rem" }}
+                                onMouseEnter={toggleDdown2Enter}
+                                onClick={toggleDdown2Enter}
                             >
                                 Informasi
-                                <svg
-                                    className="w-2.5 h-2.5 ms-2.5"
-                                    aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 10 6"
-                                >
-                                    <path
-                                        stroke="currentColor"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="m1 1 4 4 4-4"
-                                    />
-                                </svg>
+                                <div className="mt-2">
+                                    <svg
+                                        className="w-2.5 h-2.5 ms-2.5"
+                                        aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 10 6"
+                                    >
+                                        <path
+                                            stroke="currentColor"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="m1 1 4 4 4-4"
+                                        />
+                                    </svg>
+                                </div>
                             </button>
-                            <Dropdown
-                                isOpen={openDropdown === "dropdown3"}
-                                toggle={() => toggleDropdown("dropdown3")}
-                                className="absolute top-full right-0 left-0 sm:static sm:left-auto sm:right-auto border border-gray-600 rounded-md  "
-                            >
-                                <Link href="/artikel">
-                                    <DropdownItem>
-                                        Berita & Artikel
-                                    </DropdownItem>
-                                </Link>
-                                <Link href="/about">
-                                    <DropdownItem>Tentang Kami</DropdownItem>
-                                </Link>
-                            </Dropdown>
+                            {openDdown2 && (
+                                <div
+                                    className="right-0 px-2 py-1 mt-1 bg-white rounded-md shadow lg:absolute z-10"
+                                    onMouseEnter={toggleDdown2Enter}
+                                    onMouseLeave={toggleDdown2Leave}
+                                >
+                                    <ul className="space-y-2 lg:w-48">
+                                        <li>
+                                            <a
+                                                href="/artikel"
+                                                className="flex p-2 font-medium text-gray-600 rounded-md hover:bg-gray-100 hover:text-black"
+                                            >
+                                                 Berita & Artikel
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="/about"
+                                                className="flex p-2 font-medium text-gray-600 rounded-md hover:bg-gray-100 hover:text-black"
+                                            >
+                                                Tentang Kami
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            )}
                         </li>
                     </ul>
                 </div>
