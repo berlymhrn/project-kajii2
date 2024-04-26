@@ -5,7 +5,7 @@ import Feature from "@/Components/ListFeature";
 import MiniCardSkeleton from "@/Components/loading/MiniCardSkeleton";
 import DesaKajii from "@/services/DesaKajii";
 import Navbar4 from "@/Components/Navbar4";
-import Footer from "@/Components/Footer"; 
+import Footer from "@/Components/Footer";
 
 function Index() {
     const [paketWisata, setPaketWisata] = useState([]);
@@ -50,6 +50,7 @@ function Index() {
                 const imgUrls = item.gambar.split(",");
                 imageTrim = imgUrls[0].trim();
             }
+            const imagePath = "http://127.0.0.1:8088/" + imageTrim;
 
             return (
                 <CardAll
@@ -58,7 +59,7 @@ function Index() {
                     titlePosition={"justify-center"}
                     smallTitlePosition={"justify-center"}
                     smallTitle={item.waktu}
-                    img={imageTrim}
+                    img={imagePath}
                     capt={"Fasilitas"}
                     feature={<Feature featureTitle={fasilitasArray} />}
                     price={hargaCurrency}
@@ -79,7 +80,7 @@ function Index() {
             <Navbar4 />
 
             <div className="mx-12 md:mx-20 ">
-                <h1 className="font-bold text-h2 md:text-h1 mt-20 flex justify-center mb-12 md:mb-16">
+                <h1 className="font-bold text-h2 md:text-h1 mt-20 text-center mb-12 md:mb-16">
                     PAKET WISATA
                 </h1>
                 <div className="flex flex-wrap gap-3">

@@ -36,11 +36,12 @@ function Index() {
         return hiburan.map((item) => {
             const hargaFormatted = item.harga.toLocaleString("id-ID");
             const hargaCurrency = `IDR ${hargaFormatted}`;
+            const imagePath = "http://127.0.0.1:8088/" + item.gambar;
             return (
                 <CardActivity
                     key={item.id_hiburan}
                     title={item.judul}
-                    image={item.gambar}
+                    image={imagePath}
                     price={hargaCurrency}
                     action={
                         <CustomButton
@@ -56,17 +57,14 @@ function Index() {
     return (
         <div>
             <Navbar4 />
-        <div className="mx-12 md:mx-20">
-            <h1 className="font-bold text-h2 md:text-h1 mt-20 flex justify-center mb-12 md:mb-16">
-                Hiburan
-            </h1>
-            <div className="flex flex-wrap gap-3">{renderHiburan()}</div>
-            
+            <div className="mx-12 md:mx-20">
+                <h1 className="font-bold text-h2 md:text-h1 mt-20 text-center mb-12 md:mb-16">
+                    Hiburan
+                </h1>
+                <div className="flex flex-wrap gap-3">{renderHiburan()}</div>
+            </div>
+            <Footer />
         </div>
-        <Footer />
-        </div>
-
-        
     );
 }
 

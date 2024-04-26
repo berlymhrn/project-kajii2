@@ -5,7 +5,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 // Route::get('/detail/{id}', function ($id) {
 //     return Inertia::render('CobaDetail', ['id' => $id]);
@@ -21,7 +21,7 @@ Route::get('/artikel', function () {
     return Inertia::render('News/Index');
 });
 Route::get('/artikel/{id}', function ($id) {
-    return Inertia::render('News/DetailNews',['id' => $id]);
+    return Inertia::render('News/DetailNews', ['id' => $id]);
 });
 Route::get('/kegiatan', function () {
     return Inertia::render('Kegiatan/Index');
@@ -30,13 +30,13 @@ Route::get('/homestay', function () {
     return Inertia::render('Homestay/Index');
 });
 Route::get('/homestay/detail/{id}', function ($id) {
-    return Inertia::render('Homestay/DetailHomestay',['id' => $id]);
+    return Inertia::render('Homestay/DetailHomestay', ['id' => $id]);
 });
 Route::get('/ikan-hias', function () {
     return Inertia::render('IkanHias/Index');
 });
 Route::get('/ikan-hias/detail/{id}', function ($id) {
-    return Inertia::render('IkanHias/DetailIkanHias',['id' => $id]);
+    return Inertia::render('IkanHias/DetailIkanHias', ['id' => $id]);
 });
 Route::get('/ikan-hias-all', function () {
     return Inertia::render('IkanHias/IkanHias');
@@ -45,7 +45,7 @@ Route::get('/kolam-ikan-all', function () {
     return Inertia::render('IkanHias/KolamIkan');
 });
 Route::get('/kolam-ikan/detail/{id}', function ($id) {
-    return Inertia::render('IkanHias/DetailKolam',['id' => $id]);
+    return Inertia::render('IkanHias/DetailKolam', ['id' => $id]);
 });
 Route::get('/paket-wisata', function () {
     return Inertia::render('Wisata/Index');
@@ -70,7 +70,7 @@ Route::get('/account/history', function () {
 });
 Route::get('/login', function () {
     return Inertia::render('Auth/Login');
-});
+})->name('login');
 Route::get('/register', function () {
     return Inertia::render('Auth/Register');
 });

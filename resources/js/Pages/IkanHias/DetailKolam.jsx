@@ -17,7 +17,7 @@ function DetailKolamIkan() {
         if (!id) return;
         const fetchData = async () => {
             try {
-                const response = await DesaKajii.get(`/kolam-ikan/${id}`);
+                const response = await DesaKajii.get(`/katalog/kolam${id}`);
                 setDetailKolam(response.data);
                 setLoading(false);
             } catch (error) {
@@ -33,7 +33,7 @@ function DetailKolamIkan() {
             return <CardTransSkeleton />;
         }
         const imageArray = detailKolam.gambar.split(",");
-        const cleanedImages = imageArray.map((image) => image.trim());
+        const cleanedImages = imageArray.map((image) => 'http://127.0.0.1:8088/'+image.trim());
         return <CarouselComponent images={cleanedImages} limit={5} />;
     };
 
