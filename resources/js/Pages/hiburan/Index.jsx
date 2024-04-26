@@ -48,6 +48,7 @@ function Index() {
                             text={"Pesan Sekarang"}
                             bgColor={"bg-red-600"}
                             font={"font-semibold"}
+                            linkTo={`/booking/hiburan/${item.id_hiburan}`}
                         />
                     }
                 />

@@ -142,9 +142,9 @@ function Index() {
                     action={
                         <CustomButton
                             text={"Pesan Sekarang"}
-                            linkTo={"/coba"}
                             bgColor={"bg-red-600"}
                             font={"font-semibold"}
+                            linkTo={`/booking/paket-wisata/${item.id_paket_wisata}`}
                         />
                     }
                 />
@@ -216,6 +216,7 @@ function Index() {
                             text={"Pesan Sekarang"}
                             bgColor={"bg-red-600"}
                             font={"font-semibold"}
+                            linkTo={`/booking/kegiatan/${item.id_kegiatan}`}
                         />
                     }
                 />
@@ -338,12 +339,12 @@ function Index() {
                     </h2>
                     <div className="flex flex-wrap gap-3">
                         {renderKegiatan()}
-                        <Link href="/kegiatan">
-                            <h5 className="underline text-2xl tracking-tight font-bold text-primaryColor">
-                                Lihat Lainnya
-                            </h5>
-                        </Link>
                     </div>
+                    <Link href="/kegiatan">
+                        <h5 className="underline text-2xl tracking-tight font-bold text-primaryColor">
+                            Lihat Lainnya
+                        </h5>
+                    </Link>
                 </div>
 
                 <div className="mb-20 md:mb-32">
@@ -352,12 +353,12 @@ function Index() {
                     </h2>
                     <div className="flex flex-wrap gap-3">
                         {renderPaketWisata()}
-                        <Link href="/paket-wisata">
-                            <h5 className="underline text-2xl tracking-tight font-bold text-primaryColor">
-                                Lihat Lainnya
-                            </h5>
-                        </Link>
                     </div>
+                    <Link href="/paket-wisata">
+                        <h5 className="underline text-2xl tracking-tight font-bold text-primaryColor">
+                            Lihat Lainnya
+                        </h5>
+                    </Link>
                 </div>
 
                 <div className="mb-20 md:mb-32">
@@ -366,12 +367,12 @@ function Index() {
                     </h2>
                     <div className="flex flex-wrap gap-3">
                         {renderHomestay()}
-                        <Link href="/homestay">
-                            <h5 className="underline text-2xl tracking-tight font-bold text-primaryColor">
-                                Lihat Lainnya
-                            </h5>
-                        </Link>
                     </div>
+                    <Link href="/homestay">
+                        <h5 className="underline text-2xl tracking-tight font-bold text-primaryColor">
+                            Lihat Lainnya
+                        </h5>
+                    </Link>
                 </div>
 
                 <div className="mb-20 md:mb-32">

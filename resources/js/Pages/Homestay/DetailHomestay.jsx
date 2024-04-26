@@ -128,6 +128,7 @@ function DetailHomestay() {
                         text={"Pesan Sekarang"}
                         bgColor={"bg-red-600"}
                         font={"font-semibold"}
+                        linkTo={`/booking/homestay/${id}`}
                     />
                 </div>
             </div>

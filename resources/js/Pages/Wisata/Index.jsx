@@ -66,7 +66,7 @@ function Index() {
                     action={
                         <CustomButton
                             text={"Pesan Sekarang"}
-                            linkTo={"/coba"}
+                            linkTo={`/booking/paket-wisata/${item.id_paket_wisata}`}
                             bgColor={"bg-red-600"}
                             font={"font-semibold"}
                         />

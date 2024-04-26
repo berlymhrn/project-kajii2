@@ -50,6 +50,7 @@ function Index() {
                             text={"Pesan Sekarang"}
                             bgColor={"bg-red-600"}
                             font={"font-semibold"}
+                            linkTo={`/booking/kegiatan/${item.id_kegiatan}`}
                         />
                     }
                 />

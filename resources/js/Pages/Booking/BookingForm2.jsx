@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TextInput from "@/Components/TextInput";
 import InputLabel from "@/Components/InputLabel";
 import CustomButton from "@/Components/CustomButton";
 import { usePage } from "@inertiajs/react";
+import DesaKajii from "@/services/DesaKajii";
 
 function BookingForm2() {
+    const { props } = usePage();
+    const { entityType, id } = props;
+
     const [name, setName] = useState("");
     const [telephone, setTelephone] = useState("");
     const [email, setEmail] = useState("");
     const [bookingType, setBookingType] = useState("");
+    const [price, setPrice] = useState("");
     const [checkIn, setCheckIn] = useState("");
     const [errors, setErrors] = useState({});
 
@@ -48,9 +53,33 @@ function BookingForm2() {
         return Object.keys(errors).length === 0;
     };
 
+    useEffect(() => {
+        if (!entityType || !id) return;
+        const fetchData = async () => {
+            try {
+                let response;
+                if (entityType === "kegiatan") {
+                    response = await DesaKajii.get(`/kegiatan/${id}`);
+                } else if (entityType === "paket-wisata") {
+                    response = await DesaKajii.get(`/paket-wisata/${id}`);
+                } else if (entityType === "hiburan") {
+                    response = await DesaKajii.get(`/hiburan/${id}`);
+                } else if (entityType === "homestay") {
+                    response = await DesaKajii.get(`/homestay/${id}`);
+                }
+                setBookingType(response.data.judul);
+                setPrice(response.data.harga);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        fetchData();
+    }, [entityType, id]);
+
     const handleButton = async (e) => {
         e.preventDefault();
-    
+
         if (validateForm()) {
             const bookingData = {
                 name,
@@ -58,13 +87,13 @@ function BookingForm2() {
                 email,
                 bookingType,
                 checkIn,
+                price,
             };
             localStorage.setItem('bookingData', JSON.stringify(bookingData));
-    
+
             window.location.href = "/booking/paymentMethod";
         }
     };
-    
 
     return (
         <div className="mx-12 md:mx-20">
@@ -167,8 +196,10 @@ function BookingForm2() {
                             />
                             <TextInput
                                 inputId={"booking"}
-                                inputType={"text"}
-                                onChange={(e) => setBookingType(e.target.value)}
+                                value={bookingType}
+                                // inputType={"text"}
+                                // onChange={(e) => setBookingType(e.target.value)}
+                                disabled
                             />
                             {errors.bookingType && (
                                 <div className="text-red-500">
@@ -202,7 +233,7 @@ function BookingForm2() {
                     <h4 className="text-h5 md:text-2xl font-bold mb-3">
                         Harga
                     </h4>
-                    <h3 className="text-h5 md:text-2xl font-semibold">Rp </h3>
+                    <h3 className="text-h5 md:text-2xl font-semibold">Rp {price}</h3>
                 </form>
             </div>
 

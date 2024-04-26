@@ -136,7 +136,14 @@ function Payment() {
                                 Jenis Booking :{bookingData.bookingType}
                             </h4>
                             <h4 className="text-p18 md:text-h5 font-semibold">
-                                Tanggal CheckIn :{bookingData.checkIn}
+                                Tanggal CheckIn:{" "}
+                                {new Date(
+                                    bookingData.checkIn
+                                ).toLocaleDateString("id-ID", {
+                                    day: "2-digit",
+                                    month: "long", 
+                                    year: "numeric",
+                                })}
                             </h4>
                         </div>
                     </div>

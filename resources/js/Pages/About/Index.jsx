@@ -60,14 +60,13 @@ function Index() {
             const formattedDate = `${dateParts[2]} ${
                 month[dateParts[1]]
             } 20${dateParts[0].slice(2)}`;
-            const imagePath = "http://127.0.0.1:8088/" + item.gambar;
             return (
                 <TimelineComponent
                     key={item.id_timeline}
                     title={item.judul}
                     date={formattedDate}
                     description={item.deskripsi}
-                    imgSrc={imagePath}
+                    imgSrc={ item.gambar}
                 />
             );
         });

@@ -53,8 +53,8 @@ Route::get('/paket-wisata', function () {
 Route::get('/hiburan', function () {
     return Inertia::render('hiburan/Index');
 });
-Route::get('/booking', function () {
-    return Inertia::render('Booking/BookingForm2');
+Route::get('/booking/{entityType}/{id}', function ($entityType, $id) {
+    return Inertia::render('Booking/BookingForm2', ['entityType' => $entityType, 'id' => $id]);
 });
 Route::get('/booking/detail', function () {
     return Inertia::render('Booking/BookingDetail');
