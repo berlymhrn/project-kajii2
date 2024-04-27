@@ -266,6 +266,8 @@ function Index() {
         scrollInto.current.scrollIntoView({ behavior: "smooth" });
     };
 
+    console.log(document.cookie);
+
     return (
         <div>
             <Head>
