@@ -3,6 +3,8 @@ import CustomButton from "@/Components/CustomButton";
 import CardActivity from "@/Components/CardActivity";
 import DesaKajii from "@/services/DesaKajii";
 import MiniCardSkeleton from "@/Components/loading/MiniCardSkeleton";
+import Navbar4 from "@/Components/Navbar4";
+import Footer from "@/Components/Footer";
 
 function IkanHias() {
     const [ikanHias, setIkanHias] = useState([]);
@@ -63,11 +65,15 @@ function IkanHias() {
     };
 
     return (
-        <div className="mx-12 md:mx-20">
-            <h1 className="font-bold text-h3 md:text-h1 mt-20 text-center mb-12 md:mb-16">
-                Ikan Hias
-            </h1>
-            <div className="flex flex-wrap gap-3">{renderIkanHias()}</div>
+        <div>
+            <Navbar4 />
+            <div className="mx-12 md:mx-20">
+                <h1 className="font-bold text-h3 md:text-h1 mt-20 text-center mb-12 md:mb-16">
+                    Ikan Hias
+                </h1>
+                <div className="flex flex-wrap gap-3">{renderIkanHias()}</div>
+            </div>
+            <Footer />
         </div>
     );
 }

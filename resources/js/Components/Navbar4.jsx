@@ -4,8 +4,8 @@ import logo from "../../../public/assets/logo.png";
 import { Link } from "@inertiajs/react";
 
 const specificCookie = document.cookie
-      .split('; ')
-      .find(row => row.startsWith('token='));
+    .split("; ")
+    .find((row) => row.startsWith("token="));
 
 const Dropdown = ({ isOpen, toggle, children, className }) => (
     <div
@@ -19,13 +19,14 @@ const Dropdown = ({ isOpen, toggle, children, className }) => (
 
 const DropdownItem = ({ children, onClick }) => (
     <li>
-        <a
-            href="#"
-            className="block px-4 py-2 hover:bg-gray-100"
-            onClick={onClick}
-        >
-            {children}
-        </a>
+        <div className="block px-4 py-2 hover:bg-gray-100" onClick={onClick}>
+            <span
+                className="block px-4 py-2 hover:bg-gray-100"
+                onClick={onClick}
+            >
+                {children}
+            </span>
+        </div>
     </li>
 );
 
@@ -69,7 +70,7 @@ const Navbar = () => {
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <div>
                     <a
-                        href="#"
+                        href="/"
                         className="flex items-center space-x-3 rtl:space-x-reverse"
                     >
                         <img src={logo} className="mr-3 h-20 md:h-28" alt="" />
@@ -78,19 +79,19 @@ const Navbar = () => {
                 <div className="hidden md:block">
                     <ul className="flex flex-col font-medium p-2 md:p-4 mt-4 border border-t-0 rounded-t-none border-red-100 rounded-lg bg-primaryColor md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-primaryColor">
                         <li>
-                            <Link
+                            <a
                                 href="/"
-                                className="block py-2 px-3 text-white focus:bg-white rounded-md focus:text-black dark:bg-primaryColor text-white "
+                                className="block py-2 px-3 focus:bg-white rounded-md focus:text-black bg-primaryColor text-white"
                                 aria-current="page"
                                 style={{ fontSize: "1.2rem" }}
                             >
                                 Home
-                            </Link>
+                            </a>
                         </li>
                         <li>
                             <Link
                                 href="/ikan-hias"
-                                className="block py-2 px-3 text-white focus:bg-white rounded-md focus:text-black dark:bg-primaryColor text-white "
+                                className="block py-2 px-3  focus:bg-white rounded-md focus:text-black bg-primaryColor text-white "
                                 aria-current="page"
                                 style={{ fontSize: "1.2rem" }}
                             >
@@ -131,28 +132,21 @@ const Navbar = () => {
                                 >
                                     <ul className="space-y-2 lg:w-48">
                                         <li>
-                                            <a
-                                                href="/kegiatan"
-                                                className="flex p-2 font-medium text-gray-600 rounded-md hover:bg-gray-100 hover:text-black"
-                                            >
-                                                Kegiatan
-                                            </a>
+                                            <div className="flex p-2 font-medium text-gray-600 rounded-md hover:bg-gray-100 hover:text-black">
+                                                <a href="/kegiatan">Kegiatan</a>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a
-                                                href="/homestay"
-                                                className="flex p-2 font-medium text-gray-600 rounded-md hover:bg-gray-100 hover:text-black"
-                                            >
-                                                Homestay
-                                            </a>
+                                            <div className="flex p-2 font-medium text-gray-600 rounded-md hover:bg-gray-100 hover:text-black">
+                                                <a href="/homestay">Homestay</a>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a
-                                                href="/paket-wisata"
-                                                className="flex p-2 font-medium text-gray-600 rounded-md hover:bg-gray-100 hover:text-black"
-                                            >
-                                                Paket Wisata
-                                            </a>
+                                            <div className="flex p-2 font-medium text-gray-600 rounded-md hover:bg-gray-100 hover:text-black">
+                                                <a href="/paket-wisata">
+                                                    Paket Wisata
+                                                </a>
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>
@@ -193,22 +187,19 @@ const Navbar = () => {
                                 >
                                     <ul className="space-y-2 lg:w-48">
                                         <li>
-                                            <a
-                                                href="/artikel"
-                                                className="flex p-2 font-medium text-gray-600 rounded-md hover:bg-gray-100 hover:text-black"
-                                            >
-                                                Berita & Artikel
-                                            </a>
+                                            <div className="flex p-2 font-medium text-gray-600 rounded-md hover:bg-gray-100 hover:text-black">
+                                                <a href="/artikel">
+                                                    Paket Wisata
+                                                </a>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a
-                                                href="/about"
-                                                className="flex p-2 font-medium text-gray-600 rounded-md hover:bg-gray-100 hover:text-black"
-                                            >
-                                                Tentang Kami
-                                            </a>
+                                            <div className="flex p-2 font-medium text-gray-600 rounded-md hover:bg-gray-100 hover:text-black">
+                                                <a href="/about">
+                                                    Tentang Kami
+                                                </a>
+                                            </div>
                                         </li>
-                                       
                                     </ul>
                                 </div>
                             )}
@@ -298,7 +289,7 @@ const Navbar = () => {
                         <li>
                             <Link
                                 href="/"
-                                className="block py-2 px-3 text-white focus:bg-white rounded-md focus:text-black dark:bg-primaryColor text-white "
+                                className="block py-2 px-3 text-white focus:bg-white rounded-md focus:text-blackbg-primaryColor"
                                 aria-current="page"
                             >
                                 Home
@@ -307,7 +298,7 @@ const Navbar = () => {
                         <li>
                             <Link
                                 href="/ikan-hias"
-                                className="block py-2 px-3 text-white focus:bg-white rounded-md focus:text-black dark:bg-primaryColor text-white"
+                                className="block py-2 px-3 text-white focus:bg-white rounded-md focus:text-blackbg-primaryColor"
                                 aria-current="page"
                             >
                                 Ikan Hias
@@ -413,7 +404,7 @@ const Navbar = () => {
                                                 href="/artikel"
                                                 className="flex p-2 font-medium text-gray-600 rounded-md hover:bg-gray-100 hover:text-black"
                                             >
-                                                 Berita & Artikel
+                                                Berita & Artikel
                                             </a>
                                         </li>
                                         <li>

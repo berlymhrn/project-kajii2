@@ -3,6 +3,8 @@ import CustomButton from "@/Components/CustomButton";
 import DesaKajii from "@/services/DesaKajii";
 import MiniCardSkeleton from "@/Components/loading/MiniCardSkeleton";
 import CardAll from "@/Components/CardAll";
+import Navbar4 from "@/Components/Navbar4";
+import Footer from "@/Components/Footer";
 
 function KolamIkan() {
     const [kolamIkan, setKolamIkan] = useState([]);
@@ -11,9 +13,7 @@ function KolamIkan() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const kolamIkanResponse = await DesaKajii.get(
-                    "/katalog/kolam"
-                );
+                const kolamIkanResponse = await DesaKajii.get("/katalog/kolam");
                 setKolamIkan(kolamIkanResponse.data.kolam);
 
                 setLoading(false);
@@ -67,11 +67,15 @@ function KolamIkan() {
     };
 
     return (
-        <div className="mx-12 md:mx-20">
-            <h1 className="font-bold text-h3 md:text-h1 mt-20 text-center mb-12 md:mb-16">
-                Kolam Ikan
-            </h1>
-            <div className="flex flex-wrap gap-3">{renderKolamIkan()}</div>
+        <div>
+            <Navbar4 />
+            <div className="mx-12 md:mx-20">
+                <h1 className="font-bold text-h3 md:text-h1 mt-20 text-center mb-12 md:mb-16">
+                    Kolam Ikan
+                </h1>
+                <div className="flex flex-wrap gap-3">{renderKolamIkan()}</div>
+            </div>
+            <Footer />
         </div>
     );
 }

@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Profile1 from "../../../../public/assets/profile1.png";
-import Profile2 from "../../../../public/assets/profile2.jpg";
-import image1 from "../../../../public/assets/HS Platy Depan.jpg";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -174,7 +171,6 @@ function Index() {
     return (
         <div>
             <Navbar4 />
-
             <div>
                 <h1 className="font-bold text-h3 md:text-h1 mt-20 text-center mb-12 md:mb-16">
                     Ikan Hias Terbaik

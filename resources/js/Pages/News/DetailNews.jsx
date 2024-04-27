@@ -3,6 +3,8 @@ import { usePage } from "@inertiajs/react";
 import DesaKajii from "@/services/DesaKajii";
 import { IconChevronLeft } from "@tabler/icons-react";
 import TextSkeleton from "@/Components/loading/TextSkeleton";
+import Navbar4 from "@/Components/Navbar4";
+import Footer from "@/Components/Footer";
 
 function DetailNews() {
     const { props } = usePage();
@@ -90,124 +92,131 @@ function DetailNews() {
     };
 
     return (
-        <div className="max-w-[85rem] sm:px-6 lg:px-8 mx-12 md:mx-20 ">
-            <div className="grid lg:grid-cols-3 gap-y-8 lg:gap-y-0 lg:gap-x-6">
-                <div className="lg:col-span-2">
-                    <div className="py-8 lg:pe-8">
-                        <div className="space-y-5 lg:space-y-8">
-                            <a
-                                className="inline-flex items-center gap-x-1.5 text-p18 text-gray-600 decoration-2 hover:underline decoration-primaryColor"
-                                href="/artikel"
-                            >
-                                <IconChevronLeft />
-                                Kembali
-                            </a>
+        <div>
+            <Navbar4 />
+            <div className="max-w-[85rem] sm:px-6 lg:px-8 mx-12 md:mx-20 ">
+                <div className="grid lg:grid-cols-3 gap-y-8 lg:gap-y-0 lg:gap-x-6">
+                    <div className="lg:col-span-2">
+                        <div className="py-8 lg:pe-8">
+                            <div className="space-y-5 lg:space-y-8">
+                                <a
+                                    className="inline-flex items-center gap-x-1.5 text-p18 text-gray-600 decoration-2 hover:underline decoration-primaryColor"
+                                    href="/artikel"
+                                >
+                                    <IconChevronLeft />
+                                    Kembali
+                                </a>
 
-                            {loading ? (
-                                <div className="bg-gray-200 h-10 w-3/4 rounded-full animate-pulse"></div>
-                            ) : (
-                                <h1 className="text-h3 tracking-tight font-bold md:text-h1">
-                                    {detailNews.judul}
-                                </h1>
-                            )}
-
-                            <div className="flex items-center gap-x-5">
                                 {loading ? (
-                                    <div className="bg-gray-200 h-5 w-1/4 rounded-full animate-pulse"></div>
+                                    <div className="bg-gray-200 h-10 w-3/4 rounded-full animate-pulse"></div>
                                 ) : (
-                                    detailNews.dibuat && (
-                                        <div>
-                                            <p className="text-p16 text-gray-800">
-                                                {formattedDate}
-                                            </p>
-                                        </div>
-                                    )
+                                    <h1 className="text-h3 tracking-tight font-bold md:text-h1">
+                                        {detailNews.judul}
+                                    </h1>
                                 )}
-                            </div>
 
-                            <div className="text-center">
-                                <div className="grid lg:grid-cols-2 gap-3">
-                                    <div className="grid grid-cols-2 lg:grid-cols-1 gap-3">
-                                        <figure className="relative w-full h-60">
-                                            {loading || !detailNews.gambar ? (
-                                                <div className="bg-gray-200 w-full h-full rounded-xl animate-pulse"></div>
-                                            ) : (
-                                                <img
-                                                    className="size-full absolute top-0 start-0 object-cover rounded-xl"
-                                                    src={
-                                                        "http://127.0.0.1:8088/" +
-                                                        detailNews.gambar.split(
-                                                            ","
-                                                        )[0]
-                                                    }
-                                                    alt="Image Artikel/Berita"
-                                                />
-                                            )}
-                                        </figure>
+                                <div className="flex items-center gap-x-5">
+                                    {loading ? (
+                                        <div className="bg-gray-200 h-5 w-1/4 rounded-full animate-pulse"></div>
+                                    ) : (
+                                        detailNews.dibuat && (
+                                            <div>
+                                                <p className="text-p16 text-gray-800">
+                                                    {formattedDate}
+                                                </p>
+                                            </div>
+                                        )
+                                    )}
+                                </div>
 
-                                        <figure className="relative w-full h-60">
+                                <div className="text-center">
+                                    <div className="grid lg:grid-cols-2 gap-3">
+                                        <div className="grid grid-cols-2 lg:grid-cols-1 gap-3">
+                                            <figure className="relative w-full h-60">
+                                                {loading ||
+                                                !detailNews.gambar ? (
+                                                    <div className="bg-gray-200 w-full h-full rounded-xl animate-pulse"></div>
+                                                ) : (
+                                                    <img
+                                                        className="size-full absolute top-0 start-0 object-cover rounded-xl"
+                                                        src={
+                                                            "http://127.0.0.1:8088/" +
+                                                            detailNews.gambar.split(
+                                                                ","
+                                                            )[0]
+                                                        }
+                                                        alt="Image Artikel/Berita"
+                                                    />
+                                                )}
+                                            </figure>
+
+                                            <figure className="relative w-full h-60">
+                                                {loading ||
+                                                !detailNews.gambar ||
+                                                !detailNews.gambar.split(
+                                                    ","
+                                                )[1] ? (
+                                                    <div className="bg-gray-200 w-full h-full rounded-xl animate-pulse"></div>
+                                                ) : (
+                                                    <img
+                                                        className="size-full absolute top-0 start-0 object-cover rounded-xl"
+                                                        src={
+                                                            "http://127.0.0.1:8088/" +
+                                                            detailNews.gambar.split(
+                                                                ","
+                                                            )[1]
+                                                        }
+                                                        alt="Image Artikel/Berita"
+                                                    />
+                                                )}
+                                            </figure>
+                                        </div>
+                                        <figure className="relative w-full h-72 sm:h-96 lg:h-full">
                                             {loading ||
                                             !detailNews.gambar ||
-                                            !detailNews.gambar.split(",")[1] ? (
+                                            !detailNews.gambar.split(",")[2] ? (
                                                 <div className="bg-gray-200 w-full h-full rounded-xl animate-pulse"></div>
                                             ) : (
                                                 <img
-                                                    className="size-full absolute top-0 start-0 object-cover rounded-xl"
+                                                    className="size-full absolute top-0 start-0 object-cover rounded-xl "
                                                     src={
                                                         "http://127.0.0.1:8088/" +
                                                         detailNews.gambar.split(
                                                             ","
-                                                        )[1]
+                                                        )[2]
                                                     }
                                                     alt="Image Artikel/Berita"
                                                 />
                                             )}
                                         </figure>
                                     </div>
-                                    <figure className="relative w-full h-72 sm:h-96 lg:h-full">
-                                        {loading ||
-                                        !detailNews.gambar ||
-                                        !detailNews.gambar.split(",")[2] ? (
-                                            <div className="bg-gray-200 w-full h-full rounded-xl animate-pulse"></div>
-                                        ) : (
-                                            <img
-                                                className="size-full absolute top-0 start-0 object-cover rounded-xl "
-                                                src={
-                                                    "http://127.0.0.1:8088/" +
-                                                    detailNews.gambar.split(
-                                                        ","
-                                                    )[2]
-                                                }
-                                                alt="Image Artikel/Berita"
-                                            />
-                                        )}
-                                    </figure>
                                 </div>
-                            </div>
 
-                            {loading ? (
-                                <TextSkeleton />
-                            ) : (
-                                <p className="font-medium text-p18 md:text-h5">
-                                    {detailNews.deskripsi}
-                                </p>
-                            )}
+                                {loading ? (
+                                    <TextSkeleton />
+                                ) : (
+                                    <p className="font-medium text-p18 md:text-h5">
+                                        {detailNews.deskripsi}
+                                    </p>
+                                )}
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div className="mt-28 md:mt-64">
-                    <div className="bg-gray-100 rounded-xl p-6">
-                        <h3 className="text-p18 md:text-h5 font-bold text-gray-800">
-                            Baca Berita & Artikel Lainnya
-                        </h3>
+                    <div className="mt-28 md:mt-64">
+                        <div className="bg-gray-100 rounded-xl p-6">
+                            <h3 className="text-p18 md:text-h5 font-bold text-gray-800">
+                                Baca Berita & Artikel Lainnya
+                            </h3>
 
-                        <div className="mt-6 space-y-6">
-                            {renderRecomendation()}
+                            <div className="mt-6 space-y-6">
+                                {renderRecomendation()}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <Footer />
         </div>
     );
 }

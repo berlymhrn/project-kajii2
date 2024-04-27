@@ -1,10 +1,11 @@
 import React from "react";
 import logo from "../../../public/assets/logo.png";
+import { IconMapPinFilled } from "@tabler/icons-react";
 
 const Footer = () => {
     return (
         <>
-            <footer className="relative z-10 bg-primaryColor pb-10 pt-20 lg:pb-20 lg:pt-[120px] mt-40">
+            <footer className="relative z-10 bg-primaryColor pb-10 pt-20 lg:pb-20 lg:pt-[120px] mt-56">
                 <div className="container">
                     <div className="mx-4 flex flex-wrap">
                         <div className="w-full px-4 sm:w-2/3 lg:w-3/12">
@@ -24,7 +25,7 @@ const Footer = () => {
                                         className="max-w-full hidden dark:block"
                                     />
                                 </a>
-                                <p className="flex items-center text-sm font-medium text-dark text-white">
+                                <p className="flex items-center text-md font-medium text-white">
                                     <span className="mr-3 text-primary">
                                         <svg
                                             width="20"
@@ -58,7 +59,7 @@ const Footer = () => {
                                             </defs>
                                         </svg>
                                     </span>
-                                    <span>+012 (345) 678 99</span>
+                                    <span>+6288225208880</span>
                                 </p>
                             </div>
                         </div>
@@ -83,17 +84,19 @@ const Footer = () => {
                         </LinkGroup>
                         <div className="w-full px-4 sm:w-1/2 lg:w-3/12">
                             <div className="mb-10 w-full">
-                                <h4 className="mb-9 text-lg font-semibold text-dark text-white">
+                                <h4 className="mb-9 text-lg font-semibold text-white">
                                     Lokasi
                                 </h4>
-                                <p className="text-base text-body-color text-white">
-                                    &copy; Lorem ipsum, dolor sit amet
-                                    consectetur adipisicing elit. Quos dolor
-                                    deleniti voluptatum quasi, iste ut natus
-                                    inventore ipsa? Rerum laboriosam est
-                                    ratione! Eum cupiditate ad explicabo culpa,
-                                    minus maxime quae.
-                                </p>
+                                <div className="flex gap-3">
+                                    <span>
+                                        <IconMapPinFilled className="text-white" />
+                                    </span>
+                                    <p className="text-md text-body-color text-white">
+                                        Kadisoro, Gilangharjo, Kec. Pandak,
+                                        Kabupaten Bantul, Daerah Istimewa
+                                        Yogyakarta, 55761
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -146,7 +149,7 @@ const LinkGroup = ({ children, header }) => {
         <>
             <div className="w-full px-4 sm:w-1/2 lg:w-2/12">
                 <div className="mb-10 w-full">
-                    <h4 className="mb-9 text-lg font-semibold text-dark text-white">
+                    <h4 className="mb-9 text-lg font-semibold text-white">
                         {header}
                     </h4>
                     <ul className="space-y-3">{children}</ul>
@@ -161,7 +164,7 @@ const NavLink = ({ link, label }) => {
         <li>
             <a
                 href={link}
-                className="inline-block text-base leading-loose text-body-color hover:text-primary text-white"
+                className="inline-block text-md leading-loose text-body-color hover:text-primary text-white"
             >
                 {label}
             </a>

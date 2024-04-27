@@ -5,18 +5,14 @@ import DesaKajii from "@/services/DesaKajii";
 import heroSection from "../../../../public/assets/heroSection.png";
 import CustomButton from "@/Components/CustomButton";
 import Review from "@/Components/Review";
-import Profile2 from "../../../../public/assets/profile2.jpg";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Faq from "@/Components/Faq";
 import CarouselComponent from "@/Components/Carousel";
 import { IconBrandWhatsapp } from "@tabler/icons-react";
-import Card from "@/Components/Card";
-import CardBerita from "@/Components/CardNews";
 import CardAll from "@/Components/CardAll";
 import Feature from "@/Components/ListFeature";
-import CardTransaksi from "@/Components/CardTransaction";
 import CardActivity from "@/Components/CardActivity";
 import TextSkeleton from "@/Components/loading/TextSkeleton";
 import MiniCardSkeleton from "@/Components/loading/MiniCardSkeleton";
@@ -24,7 +20,6 @@ import CardTransSkeleton from "@/Components/loading/CardTransSkeleton";
 import FaqSkeleton from "@/Components/loading/FaqSkeleton";
 import Navbar4 from "@/Components/Navbar4";
 import Footer from "@/Components/Footer";
-
 
 function Index() {
     const settings = {
@@ -118,10 +113,16 @@ function Index() {
         return paketWisata.slice(0, 4).map((item) => {
             const fasilitasArray = item.fasilitas
                 .split(",")
-                .map((fasilitas) => fasilitas.trim())
-                .slice(0, 10);
-            const hargaFormatted = item.harga.toLocaleString("id-ID");
-            const hargaCurrency = `IDR ${hargaFormatted}`;
+                .map((fasilitas) => fasilitas.trim());
+
+            const formatCurrency = (amount) => {
+                const formattedAmount = amount.toLocaleString("id-ID");
+                return `IDR ${formattedAmount}`;
+            };
+            const hargaCurrency = formatCurrency(item.harga);
+            const promoCurrency =
+                item.promo !== 0 ? formatCurrency(item.promo) : null;
+
             let imageTrim = item.gambar;
             if (item.gambar.includes(",")) {
                 const imgUrls = item.gambar.split(",");
@@ -140,6 +141,7 @@ function Index() {
                     capt={"Fasilitas"}
                     feature={<Feature featureTitle={fasilitasArray} />}
                     price={hargaCurrency}
+                    discount={promoCurrency}
                     action={
                         <CustomButton
                             text={"Pesan Sekarang"}
@@ -170,6 +172,7 @@ function Index() {
 
             const hargaFormatted = item.harga.toLocaleString("id-ID");
             const hargaCurrency = `IDR ${hargaFormatted}`;
+
             return (
                 <CardAll
                     key={item.id_homestay}
@@ -274,7 +277,7 @@ function Index() {
                 <title>Home</title>
                 <meta name="" content="" />
             </Head>
-            <Navbar4/>
+            <Navbar4 />
             <a
                 href="https://wa.me/6288225208880"
                 className="fixed bottom-10 right-10 bg-primaryColor rounded-full p-4 z-10"

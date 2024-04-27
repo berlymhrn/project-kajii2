@@ -41,10 +41,15 @@ function Index() {
         return paketWisata.map((item) => {
             const fasilitasArray = item.fasilitas
                 .split(",")
-                .map((fasilitas) => fasilitas.trim())
-                .slice(0, 10);
-            const hargaFormatted = item.harga.toLocaleString("id-ID");
-            const hargaCurrency = `IDR ${hargaFormatted}`;
+                .map((fasilitas) => fasilitas.trim());
+
+            const formatCurrency = (amount) => {
+                const formattedAmount = amount.toLocaleString("id-ID");
+                return `IDR ${formattedAmount}`;
+            };
+            const hargaCurrency = formatCurrency(item.harga);
+            const promoCurrency = item.promo !== 0 ? formatCurrency(item.promo) : null;
+
             let imageTrim = item.gambar;
             if (item.gambar.includes(",")) {
                 const imgUrls = item.gambar.split(",");
@@ -63,6 +68,7 @@ function Index() {
                     capt={"Fasilitas"}
                     feature={<Feature featureTitle={fasilitasArray} />}
                     price={hargaCurrency}
+                    discount={promoCurrency}
                     action={
                         <CustomButton
                             text={"Pesan Sekarang"}

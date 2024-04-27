@@ -4,12 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-
 require __DIR__ . '/auth.php';
-
-// Route::get('/detail/{id}', function ($id) {
-//     return Inertia::render('CobaDetail', ['id' => $id]);
-// });
 
 Route::get('/', function () {
     return Inertia::render('Home/Index');
