@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+
 require __DIR__ . '/auth.php';
 
 Route::get('/', function () {
@@ -50,7 +51,7 @@ Route::get('/hiburan', function () {
 });
 Route::get('/booking/{entityType}/{id}', function ($entityType, $id) {
     return Inertia::render('Booking/BookingForm2', ['entityType' => $entityType, 'id' => $id]);
-});
+})->middleware('checkToken');
 Route::get('/booking/detail', function () {
     return Inertia::render('Booking/BookingDetail');
 });

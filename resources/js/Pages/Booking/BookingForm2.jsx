@@ -13,7 +13,8 @@ function BookingForm2() {
     const [name, setName] = useState("");
     const [telephone, setTelephone] = useState("");
     const [email, setEmail] = useState("");
-    const [id_judul, setId_judul] = useState("");
+    const [judul, setJudul] = useState("");
+    const [id_jenis, setId_jenis] = useState("");
     const [price, setPrice] = useState("");
     const [check_in, setCheck_in] = useState("");
     const [errors, setErrors] = useState({});
@@ -115,17 +116,10 @@ function BookingForm2() {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                const userData = response.data.users.find(
-                    (user) => user.token === token
-                );
-                if (userData) {
-                    setName(userData.nama);
-                    setEmail(userData.email);
-                    setTelephone(userData.no_telp);
-                    setId_user(userData.id_user);
-                } else {
-                    console.error("User data not found for the token.");
-                }
+                setName(response.data.nama);
+                setEmail(response.data.email);
+                setTelephone(response.data.no_telp);
+                setId_user(response.data.id_user);
             } catch (error) {
                 console.error("Error fetching user data:", error);
             }
@@ -149,7 +143,13 @@ function BookingForm2() {
                 } else if (entityType === "homestay") {
                     response = await DesaKajii.get(`/homestay/${id}`);
                 }
-                setId_judul(response.data.judul);
+                // Set id_jenis
+                const resp = await DesaKajii.get("/transaksi/jenis-booking");
+                const jenisBooking = resp.data.jenis.find(
+                    (jenis) => jenis.nama === response.data.judul
+                );
+                setId_jenis(jenisBooking.id_jenis);
+                setJudul(response.data.judul);
                 setPrice(response.data.harga);
             } catch (error) {
                 console.log(error);
@@ -177,8 +177,8 @@ function BookingForm2() {
             errors.email = "Format Email tidak valid";
         }
 
-        if (!id_judul.trim()) {
-            errors.id_judul = "Jenis Booking harus diisi";
+        if (!judul.trim()) {
+            errors.judul = "Jenis Booking harus diisi";
         }
 
         if (!check_in) {
@@ -333,14 +333,14 @@ function BookingForm2() {
                             />
                             <TextInput
                                 inputId={"booking"}
-                                value={id_judul}
+                                value={judul}
                                 // inputType={"text"}
-                                // onChange={(e) => setId_judul(e.target.value)}
+                                // onChange={(e) => setJudul(e.target.value)}
                                 disabled
                             />
-                            {errors.id_judul && (
+                            {errors.judul && (
                                 <div className="text-red-500">
-                                    {errors.id_judul}
+                                    {errors.judul}
                                 </div>
                             )}
                         </div>
