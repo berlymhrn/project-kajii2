@@ -244,9 +244,9 @@ export default function Register() {
                                     onClick={togglePasswordVisibility}
                                 >
                                     {showPassword ? (
-                                        <IconEyeOff />
-                                    ) : (
                                         <IconEye />
+                                    ) : (
+                                        <IconEyeOff />
                                     )}
                                 </button>
                                 {errors.password && (
@@ -257,16 +257,17 @@ export default function Register() {
                             </div>
                         </div>
 
-                        <div className="mt-20">
+                        <div className="mt-20 mb-6 flex flex-col">
                             <CustomButton
                                 text={"REGISTER"}
                                 bgColor={"bg-primaryColor"}
                                 onClick={handleButton}
+                                width={"w-full"}
                             />
 
                             <Link
                                 href="/login"
-                                className="flex justify-start w-full mt-2 underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                className="flex justify-center mt-2 underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                             >
                                 Sudah memiliki akun?
                             </Link>

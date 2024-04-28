@@ -10,6 +10,7 @@ function CardTransaksi({
     action,
     anotherAction,
     titleTruncatedFont,
+    info,
 }) {
     const truncatedTitle =
         title.length > 140 ? title.slice(0, 140) + "..." : title;
@@ -34,7 +35,7 @@ function CardTransaksi({
                         {truncatedTitle}
                     </p>
                     <p className=" mb-10 font-medium">
-                        Check In: 3 Januari 2025{" "}
+                        {info}
                     </p>
                     <div className="w-full flex flex-wrap justify-between">
                         <p className="inline-flex items-center justify-center font-semibold text-p16">

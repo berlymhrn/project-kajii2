@@ -13,7 +13,7 @@ function BookingForm2() {
     const [name, setName] = useState("");
     const [telephone, setTelephone] = useState("");
     const [email, setEmail] = useState("");
-    const [id_jenis, setId_jenis] = useState("");
+    const [id_judul, setId_judul] = useState("");
     const [price, setPrice] = useState("");
     const [check_in, setCheck_in] = useState("");
     const [errors, setErrors] = useState({});
@@ -115,13 +115,17 @@ function BookingForm2() {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                const userData = response.data.users[0];
-
-                // Set nilai input langsung dari data pengguna
-                setName(userData.nama);
-                setEmail(userData.email);
-                setTelephone(userData.no_telp);
-                setId_user(userData.id_user);
+                const userData = response.data.users.find(
+                    (user) => user.token === token
+                );
+                if (userData) {
+                    setName(userData.nama);
+                    setEmail(userData.email);
+                    setTelephone(userData.no_telp);
+                    setId_user(userData.id_user);
+                } else {
+                    console.error("User data not found for the token.");
+                }
             } catch (error) {
                 console.error("Error fetching user data:", error);
             }
@@ -145,7 +149,7 @@ function BookingForm2() {
                 } else if (entityType === "homestay") {
                     response = await DesaKajii.get(`/homestay/${id}`);
                 }
-                setId_jenis(response.data.judul);
+                setId_judul(response.data.judul);
                 setPrice(response.data.harga);
             } catch (error) {
                 console.log(error);
@@ -173,8 +177,8 @@ function BookingForm2() {
             errors.email = "Format Email tidak valid";
         }
 
-        if (!id_jenis.trim()) {
-            errors.id_jenis = "Jenis Booking harus diisi";
+        if (!id_judul.trim()) {
+            errors.id_judul = "Jenis Booking harus diisi";
         }
 
         if (!check_in) {
@@ -191,7 +195,6 @@ function BookingForm2() {
 
         return Object.keys(errors).length === 0;
     };
-
 
     //modal form
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -220,13 +223,11 @@ function BookingForm2() {
                 check_in,
             });
             console.log("Response:", response.data);
-            window.location.href = '/account/history';
-
+            window.location.href = "/account/history";
         } catch (error) {
             console.error("Error:", error);
         }
     };
-
 
     return (
         <div className="mx-12 md:mx-20">
@@ -332,14 +333,14 @@ function BookingForm2() {
                             />
                             <TextInput
                                 inputId={"booking"}
-                                value={id_jenis}
+                                value={id_judul}
                                 // inputType={"text"}
-                                // onChange={(e) => setId_jenis(e.target.value)}
+                                // onChange={(e) => setId_judul(e.target.value)}
                                 disabled
                             />
-                            {errors.id_jenis && (
+                            {errors.id_judul && (
                                 <div className="text-red-500">
-                                    {errors.id_jenis}
+                                    {errors.id_judul}
                                 </div>
                             )}
                         </div>

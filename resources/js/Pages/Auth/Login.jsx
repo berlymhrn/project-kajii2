@@ -74,9 +74,9 @@ export default function Login() {
                 <div>
                     <form>
                         <div>
-                            <h5 className="w-full mb-6 font-bold text-h5 flex justify-center">
-                                Login
-                            </h5>
+                        <h1 className="w-full mb-14 font-bold text-h3 flex justify-center">
+                                LogIn
+                            </h1>
                         </div>
 
                         <div className="mb-4">
@@ -128,9 +128,9 @@ export default function Login() {
                                     onClick={togglePasswordVisibility}
                                 >
                                     {showPassword ? (
-                                        <IconEyeOff />
-                                    ) : (
                                         <IconEye />
+                                    ) : (
+                                        <IconEyeOff />
                                     )}
                                 </button>
                                 {errors.password && (
@@ -141,16 +141,16 @@ export default function Login() {
                             </div>
                         </div>
 
-                        <div className="mt-10">
+                        <div className="mt-14 mb-6 flex flex-col">
                             <CustomButton
                                 text={"LOGIN"}
                                 bgColor={"bg-primaryColor"}
                                 onClick={handleButton}
+                                width={"w-full"}
                             />
-
                             <Link
                                 href="/register"
-                                className="flex w-full mt-2 items-center justify-start underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                className="flex mt-2 items-center justify-center underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                             >
                                 Belum memiliki akun?
                             </Link>

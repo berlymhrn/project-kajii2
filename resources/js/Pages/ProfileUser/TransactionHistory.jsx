@@ -9,7 +9,7 @@ function TransactionHistory() {
     const [loading, setLoading] = useState(true);
     const [id_user, setId_user] = useState("");
 
-    console.log(document.cookie);
+    //get transaction history user from token cookie
     const getCookieToken = () => {
         const specificCookie = document.cookie
             .split(";")
@@ -21,7 +21,6 @@ function TransactionHistory() {
         }
         return null;
     };
-
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -37,8 +36,14 @@ function TransactionHistory() {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                const userData = response.data.users[0];
-                setId_user(userData.id_user);
+                const userData = response.data.users.find(
+                    (user) => user.token === token
+                );
+                if (userData) {
+                    setId_user(userData.id_user);
+                } else {
+                    console.error("User data not found for the token.");
+                }
 
                 //get tarnsaction history user
                 const historyResponse = await DesaKajii.get(
@@ -63,6 +68,7 @@ function TransactionHistory() {
                 );
 
                 setHistory(formattedTransactions);
+                setLoading(false);
             } catch (error) {
                 console.error("Error fetching user data:", error);
             }
@@ -85,7 +91,7 @@ function TransactionHistory() {
             const hargaCurrency = `IDR ${hargaFormatted}`;
 
             const dateParts = item.check_in.split("-");
-            const formattedDate = `${dateParts[2]}-${
+            const formattedDate = `Check In : ${dateParts[2]}-${
                 dateParts[1]
             }-20${dateParts[0].slice(2)}`;
 
