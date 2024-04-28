@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Head } from "@inertiajs/react";
 import { usePage } from "@inertiajs/react";
 import DesaKajii from "@/services/DesaKajii";
 import CarouselComponent from "@/Components/Carousel";
@@ -64,8 +65,20 @@ function DetailIkanHias() {
             </ul>
         );
     };
+
+    const handleButton = () => {
+        window.location.href = "https://wa.me/6288225208880";
+    };
+
     return (
         <div>
+            <Head>
+                <title>Detail Ikan Hias</title>
+                <meta
+                    name="description"
+                    content="Dapatkan informasi lengkap tentang ikan hias, termasuk deskripsi, gambar-gambar yang memukau, dan panduan perawatan ikan. Saksikan kecantikan dan keunikan ikan hias ini serta pelajari cara merawatnya agar tetap sehat dan bahagia di akuarium Anda. Dengan koleksi ikan hias yang eksotis dan informasi perawatan yang lengkap, Desa Kajii adalah destinasi utama bagi para pecinta ikan hias."
+                />
+            </Head>
             <Navbar4 />
             <div className="mx-12 md:mx-20">
                 <div className="mt-20">
@@ -104,15 +117,16 @@ function DetailIkanHias() {
                         <h2 className="font-bold text-h5 md:text-h2 mt-20 mb-3 md:mb-8">
                             perawatan ikan hias
                         </h2>
-                        <p className="text-p18 md:text-h5 font-medium">
+                        <div className="text-p18 md:text-h5 font-medium">
                             {renderPerawatan()}
-                        </p>
+                        </div>
                     </div>
                     <div className="mb-20">
                         <CustomButton
                             text={"Hubungi Penjual"}
                             bgColor={"bg-red-600"}
                             font={"font-semibold"}
+                            onClick={handleButton}
                         />
                     </div>
                 </div>

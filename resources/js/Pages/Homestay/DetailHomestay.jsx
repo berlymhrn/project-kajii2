@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Head } from "@inertiajs/react";
 import { usePage } from "@inertiajs/react";
 import DesaKajii from "@/services/DesaKajii";
 import CarouselComponent from "@/Components/Carousel";
@@ -78,6 +79,13 @@ function DetailHomestay() {
 
     return (
         <div>
+            <Head>
+                <title>Detail Homestay</title>
+                <meta
+                    name="description"
+                    content="Temukan homestay yang nyaman dan menawan di Desa Wisata Jogja. Dapatkan kondisi homestay, deskripsi lengkap, daftar fasilitas, dan peraturan penginapan. Nikmati kenyamanan menginap dengan pemandangan alam yang indah dan fasilitas modern yang membuat Anda betah selama berilbur di Jogja."
+                />
+            </Head>
             <Navbar4 />
             <div className="mx-12 md:mx-20">
                 <div className="mt-20">

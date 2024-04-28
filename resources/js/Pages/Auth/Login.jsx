@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Head } from "@inertiajs/react";
 import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import CustomButton from "@/Components/CustomButton";
@@ -70,11 +71,14 @@ export default function Login() {
 
     return (
         <div className="min-h-screen flex flex-col sm:justify-center items-center p-6 bg-gray-100">
+            <Head>
+                <title>Login</title>
+            </Head>
             <div className="w-full sm:max-w-md mt-0 px-6 py-6 bg-white shadow-md overflow-hidden sm:rounded-lg">
                 <div>
                     <form>
                         <div>
-                        <h1 className="w-full mb-14 font-bold text-h3 flex justify-center">
+                            <h1 className="w-full mb-14 font-bold text-h3 flex justify-center">
                                 LogIn
                             </h1>
                         </div>

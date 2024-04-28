@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Head } from "@inertiajs/react";
 import CardTransaksi from "@/Components/CardTransaction";
 import CustomButton from "@/Components/CustomButton";
 import CardTransSkeleton from "@/Components/loading/CardTransSkeleton";
@@ -30,45 +31,42 @@ function TransactionHistory() {
                     return;
                 }
 
-                //get user data from cookie
+                // Get user data from cookie
                 const response = await DesaKajii.get("/user", {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                const userData = response.data.users.find(
-                    (user) => user.token === token
-                );
-                if (userData) {
-                    setId_user(userData.id_user);
+
+                if (response.data && response.data.id_user) {
+                    setId_user(response.data.id_user);
+
+                    // Get transaction history for the user
+                    const historyResponse = await DesaKajii.get(
+                        `/transaksi/get?user=${response.data.id_user}`,
+                        {
+                            headers: {
+                                Authorization: `Bearer ${token}`,
+                            },
+                        }
+                    );
+
+                    const transactions = historyResponse.data;
+                    const formattedTransactions = transactions.map(
+                        (transaction) => ({
+                            harga: transaction.harga,
+                            dibayarkan: transaction.dibayarkan,
+                            status: transaction.status,
+                            jenis_booking: transaction.jenis_booking,
+                            check_in: transaction.check_in,
+                        })
+                    );
+
+                    setHistory(formattedTransactions);
+                    setLoading(false);
                 } else {
-                    console.error("User data not found for the token.");
+                    console.error("User data not found or incomplete.");
                 }
-
-                //get tarnsaction history user
-                const historyResponse = await DesaKajii.get(
-                    `/transaksi/get?user=${userData.id_user}`,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                    }
-                );
-
-                const transactions = historyResponse.data;
-
-                const formattedTransactions = transactions.map(
-                    (transaction) => ({
-                        harga: transaction.harga,
-                        dibayarkan: transaction.dibayarkan,
-                        status: transaction.status,
-                        jenis_booking: transaction.jenis_booking,
-                        check_in: transaction.check_in,
-                    })
-                );
-
-                setHistory(formattedTransactions);
-                setLoading(false);
             } catch (error) {
                 console.error("Error fetching user data:", error);
             }
@@ -138,6 +136,9 @@ function TransactionHistory() {
 
     return (
         <div className="mx-12 md:mx-20">
+            <Head>
+                <title>History Transaksi</title>
+            </Head>
             <div className="mb-20 md:mb-32">
                 <h1 className="font-bold text-h2 md:text-h1 mt-20 text-center mb-12 md:mb-16">
                     History Transaksi

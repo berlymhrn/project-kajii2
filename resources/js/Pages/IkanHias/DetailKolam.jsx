@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Head } from "@inertiajs/react";
 import { usePage } from "@inertiajs/react";
 import DesaKajii from "@/services/DesaKajii";
 import CarouselComponent from "@/Components/Carousel";
@@ -51,8 +52,19 @@ function DetailKolamIkan() {
         return <Feature featureTitle={jenisIkanArray} />;
     };
 
+    const handleButton = () => {
+        window.location.href = "https://wa.me/6288225208880";
+    };
+
     return (
         <div>
+            <Head>
+                <title>Detail Kolam Ikan Hias</title>
+                <meta
+                    name="description"
+                    content="Nikmati keindahan kolam ikan di Desa Kajii! Temukan berbagai jenis kolam ikan yang menakjubkan, mulai dari kolam koi yang indah hingga kolam untuk budidaya ikan hias eksotis. Saksikan keindahan alam yang mengelilingi kolam, dan rasakan kedamaian yang ditawarkan oleh lingkungan yang alami dan menenangkan. Jadikan kunjungan Anda ke kolam ikan di Desa Kajii sebagai pengalaman yang mempesona dan menginspirasi."
+                />
+            </Head>
             <Navbar4 />
             <div className="mx-12 md:mx-20">
                 <div className="mt-20">
@@ -88,15 +100,16 @@ function DetailKolamIkan() {
                         <h2 className="font-bold text-h5 md:text-h2 mt-20 mb-3 md:mb-8">
                             Jenis Ikan Budidaya
                         </h2>
-                        <p className="text-p18 md:text-h5 font-medium">
+                        <div className="text-p18 md:text-h5 font-medium">
                             {renderJenisIkan()}
-                        </p>
+                        </div>
                     </div>
                     <div className="mb-20">
                         <CustomButton
                             text={"Hubungi Penjual"}
                             bgColor={"bg-red-600"}
                             font={"font-semibold"}
+                            onClick={handleButton}
                         />
                     </div>
                 </div>

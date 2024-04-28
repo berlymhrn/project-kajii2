@@ -275,7 +275,16 @@ function Index() {
         <div>
             <Head>
                 <title>Home</title>
-                <meta name="" content="" />
+                <meta
+                    name="description"
+                    content="Jelajahi keindahan alam dan kegiatan seru di Desa Wisata Ikan Hias Jogja. Nikmati pengalaman unik bersama keluarga dan teman-teman dengan berbagai aktivitas menarik seperti memancing, bersepeda, edukasi ikan. Setelah seharian berpetualang, istirahatlah di penginapan homestay yang nyaman dengan pemandangan alam yang menakjubkan. Temukan ketenangan dan kelezatan hidangan lokal yang autentik di Desa Wisata Kajii. Jadikan liburan Anda di Jogja tak terlupakan dengan mengunjungi destinasi wisata yang satu ini."
+                />
+                <link
+                    rel="icon"
+                    type="image/png"
+                    href="../../../../public/assets/logo.png"
+                    sizes="32x32"
+                />
             </Head>
             <Navbar4 />
             <a

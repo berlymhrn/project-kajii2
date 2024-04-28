@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Head } from "@inertiajs/react";
 import CardAll from "@/Components/CardAll";
 import CustomButton from "@/Components/CustomButton";
 import Feature from "@/Components/ListFeature";
@@ -48,7 +49,8 @@ function Index() {
                 return `IDR ${formattedAmount}`;
             };
             const hargaCurrency = formatCurrency(item.harga);
-            const promoCurrency = item.promo !== 0 ? formatCurrency(item.promo) : null;
+            const promoCurrency =
+                item.promo !== 0 ? formatCurrency(item.promo) : null;
 
             let imageTrim = item.gambar;
             if (item.gambar.includes(",")) {
@@ -83,8 +85,14 @@ function Index() {
     };
     return (
         <div>
+            <Head>
+                <title>Paket Wisata</title>
+                <meta
+                    name="description"
+                    content="Temukan wisata seru di Jogja. Dapatkan pengalaman petualangan yang tak terlupakan dengan berbagai aktivitas menarik seperti memancing, bersepeda, membatik, membuat wayang. Temukan pilihan paket wisata yang sesuai dengan keinginan Anda dengan harga yang bervariasi"
+                />
+            </Head>
             <Navbar4 />
-
             <div className="mx-12 md:mx-20 ">
                 <h1 className="font-bold text-h2 md:text-h1 mt-20 text-center mb-12 md:mb-16">
                     PAKET WISATA

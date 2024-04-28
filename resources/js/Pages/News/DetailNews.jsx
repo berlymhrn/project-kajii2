@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Head } from "@inertiajs/react";
 import { usePage } from "@inertiajs/react";
 import DesaKajii from "@/services/DesaKajii";
 import { IconChevronLeft } from "@tabler/icons-react";
@@ -93,6 +94,13 @@ function DetailNews() {
 
     return (
         <div>
+            <Head>
+                <title>Detail</title>
+                <meta
+                    name="description"
+                    content="Nikmati berbagai kegiatan menarik selama berkunjung ke Desa Kajii! Dari wisata memancing, bersepeda mengelilingi pedesaan yang indah, hingga berjalan-jalan santai di taman ikan koi yang menawan, kami menawarkan pengalaman yang tak terlupakan untuk semua pengunjung. Temukan pilihan kegiatan yang sesuai dengan minat dan keinginan Anda, dan buat kenangan yang berharga di Desa ini"
+                />
+            </Head>
             <Navbar4 />
             <div className="max-w-[85rem] sm:px-6 lg:px-8 mx-12 md:mx-20 ">
                 <div className="grid lg:grid-cols-3 gap-y-8 lg:gap-y-0 lg:gap-x-6">

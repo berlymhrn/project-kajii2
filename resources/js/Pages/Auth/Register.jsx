@@ -1,4 +1,5 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { Head } from "@inertiajs/react";
 import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import CustomButton from "@/Components/CustomButton";
@@ -6,7 +7,6 @@ import { Link } from "@inertiajs/react";
 import { IconEye, IconEyeOff } from "@tabler/icons-react";
 import DesaKajii from "@/services/DesaKajii";
 import Alert from "@/Components/Alert";
-
 
 export default function Register() {
     const [nama, setNama] = useState("");
@@ -87,7 +87,6 @@ export default function Register() {
                 console.log(response.data);
                 setRegistrationSuccess(true);
                 window.location.href = "/login";
-
             } catch (error) {
                 if (error.response) {
                     const { data, status } = error.response;
@@ -115,6 +114,9 @@ export default function Register() {
 
     return (
         <div className="min-h-screen flex flex-col sm:justify-center items-center p-6 bg-gray-100">
+            <Head>
+                <title>Register</title>
+            </Head>
             <div className="flex justify-end">
                 {registrationSuccess && (
                     <Alert type="success" message="Registrasi berhasil!" />

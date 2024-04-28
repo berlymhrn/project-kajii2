@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Head } from "@inertiajs/react";
 import CustomButton from "@/Components/CustomButton";
 import DesaKajii from "@/services/DesaKajii";
 import MiniCardSkeleton from "@/Components/loading/MiniCardSkeleton";
@@ -68,6 +69,13 @@ function KolamIkan() {
 
     return (
         <div>
+            <Head>
+                <title>Kolam Ikan Hias</title>
+                <meta
+                    name="description"
+                    content="Nikmati keindahan kolam ikan di Desa Kajii! Temukan berbagai jenis kolam ikan yang menakjubkan, mulai dari kolam koi yang indah hingga kolam untuk budidaya ikan hias eksotis. Saksikan keindahan alam yang mengelilingi kolam, dan rasakan kedamaian yang ditawarkan oleh lingkungan yang alami dan menenangkan. Jadikan kunjungan Anda ke kolam ikan di Desa Kajii sebagai pengalaman yang mempesona dan menginspirasi."
+                />
+            </Head>
             <Navbar4 />
             <div className="mx-12 md:mx-20">
                 <h1 className="font-bold text-h3 md:text-h1 mt-20 text-center mb-12 md:mb-16">
