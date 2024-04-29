@@ -54,6 +54,7 @@ export default function Login() {
                 const response = await DesaKajii.post("/user/login", formData);
                 document.cookie = `token=${response.data.token};`;
                 // Jika message dari response success maka redirect ke halaman sebelumnya
+                console.log(response.data.message)
                 if (response.data.message === "success") {
                     var previousPage = document.referrer;
                     if (previousPage.endsWith("/register")) {
@@ -67,6 +68,7 @@ export default function Login() {
             }
         }
     };
+    console.log(document.referrer)
 
     return (
         <div className="min-h-screen flex flex-col sm:justify-center items-center p-6 bg-gray-100">

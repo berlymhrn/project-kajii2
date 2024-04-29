@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import { IconBellFilled, IconUserCircle, IconWorld } from "@tabler/icons-react";
 import logo from "../../../public/assets/logo.png";
 import { Link } from "@inertiajs/react";
 
-const specificCookie = document.cookie
-      .split('; ')
-      .find(row => row.startsWith('token='));
+
 
 const Dropdown = ({ isOpen, toggle, children, className }) => (
     <div
@@ -30,6 +28,7 @@ const DropdownItem = ({ children, onClick }) => (
 );
 
 const Navbar = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState(false); 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [openDropdown, setOpenDropdown] = useState(null);
     const [isAccountDropdownOpen, setIsAccountDropdownOpen] = useState(false);
@@ -43,7 +42,7 @@ const Navbar = () => {
     const toggleAccountDropdown = () => {
         setIsAccountDropdownOpen(!isAccountDropdownOpen);
     };
-
+    
     const [openDdown, setOpenDdown] = useState(false);
     const [openDdown2, setOpenDdown2] = useState(false);
 
@@ -63,6 +62,20 @@ const Navbar = () => {
     const toggleDdown2Leave = () => {
         setOpenDdown2(false);
     };
+
+    const checkLoggedIn = () => {
+        const specificCookie = document.cookie
+            .split('; ')
+            .find(row => row.startsWith('token='));
+
+        if (specificCookie) {
+            setIsLoggedIn(true); 
+        }
+    };
+
+    useEffect(() => {
+        checkLoggedIn(); 
+    }, []);
 
     return (
         <nav className="bg-primaryColor border-gray-200 px-5 md:h-300 ">
@@ -266,13 +279,17 @@ const Navbar = () => {
                                     zaza123@gmail.com
                                 </div>
                             </div>
+                            {!isLoggedIn && (
+                                <>
                             <Link href="/register">
                                 <DropdownItem>Regristasi</DropdownItem>
                             </Link>
                             <Link href="/login">
                                 <DropdownItem>Login</DropdownItem>
                             </Link>
-                            <Link href="#">
+                             </>
+                            )}
+                            <Link href="/update">
                                 <DropdownItem>
                                     Update Data Personal
                                 </DropdownItem>

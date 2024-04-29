@@ -77,3 +77,9 @@ Route::get('/register', function () {
 Route::get('/akun', function () {
     return Inertia::render('ProfileUser/ProfileAccount');
 });
+Route::get('/update', function () {
+    return Inertia::render('ProfileUser/UpdateData');
+});
+Route::get('/perbarui', function () {
+    return Inertia::render('ProfileUser/Cb1');
+});
