@@ -1,4 +1,3 @@
-// CarouselComponent.jsx
 import React from "react";
 import { Carousel } from "flowbite-react";
 import { IconChevronLeft } from "@tabler/icons-react";

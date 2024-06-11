@@ -4,6 +4,9 @@ import CardTransaksi from "@/Components/CardTransaction";
 import CustomButton from "@/Components/CustomButton";
 import CardTransSkeleton from "@/Components/loading/CardTransSkeleton";
 import DesaKajii from "@/services/DesaKajii";
+import Navbar4 from "@/Components/Navbar4";
+import Footer from "@/Components/Footer";
+import { IconBrandWhatsapp } from "@tabler/icons-react";
 
 function TransactionHistory() {
     const [history, setHistory] = useState([]);
@@ -59,6 +62,7 @@ function TransactionHistory() {
                             status: transaction.status,
                             jenis_booking: transaction.jenis_booking,
                             check_in: transaction.check_in,
+                            img: transaction.gambar,
                         })
                     );
 
@@ -97,10 +101,12 @@ function TransactionHistory() {
             const sisaPembayaranFormated = `Sisa Pembayaran : IDR ${sisaPembayaran.toLocaleString(
                 "id-ID"
             )}`;
+            const imagePath = "http://127.0.0.1:8088/" + item.img;
 
             return (
                 <CardTransaksi
                     key={item.id_transaksi}
+                    img={imagePath}
                     title={hargaCurrency}
                     header={item.jenis_booking}
                     time={formattedDate}
@@ -135,16 +141,29 @@ function TransactionHistory() {
     };
 
     return (
-        <div className="mx-12 md:mx-20">
+        <div className="">
             <Head>
                 <title>History Transaksi</title>
             </Head>
-            <div className="mb-20 md:mb-32">
-                <h1 className="font-bold text-h2 md:text-h1 mt-20 text-center mb-12 md:mb-16">
-                    History Transaksi
-                </h1>
-                <div className="flex flex-wrap gap-3">{renderHistory()}</div>
+            <Navbar4 />
+            <div className="mx-12 md:mx-20">
+                <a
+                    href="https://wa.me/6288225208880"
+                    className="fixed bottom-10 right-10 bg-primaryColor rounded-full p-4 z-50"
+                >
+                    <IconBrandWhatsapp className="text-white w-10 h-10" />
+                </a>
+                <div className="mb-20 md:mb-32">
+                    <h1 className="font-bold text-h2 md:text-h1 mt-20 text-center mb-12 md:mb-16">
+                        History Transaksi
+                    </h1>
+                    <h5 className="text-red-700 text-h5 mb-3">*Diharapkan setelah melakukan pemesanan segera untuk menghubungi admin untuk konfirmasi pembayaran.</h5>
+                    <div className="flex flex-wrap gap-3">
+                        {renderHistory()}
+                    </div>
+                </div>
             </div>
+            <Footer />
         </div>
     );
 }

@@ -2,10 +2,28 @@ import React, { useState } from "react";
 import { IconBellFilled, IconUserCircle, IconWorld } from "@tabler/icons-react";
 import logo from "../../../public/assets/logo.png";
 import { Link } from "@inertiajs/react";
+import DesaKajii from "@/services/DesaKajii";
 
-const specificCookie = document.cookie
-    .split("; ")
-    .find((row) => row.startsWith("token="));
+const handleLogout = async () => {
+    try {
+        const token = getCookie("token");
+        await DesaKajii.get("/user/logout", {
+            params: { token },
+        });
+        document.cookie = "token=; Max-Age=0; path=/;";
+        setIsLoggedIn(false);
+        window.location.href = "/";
+    } catch (error) {
+        console.error("Logout failed", error);
+    }
+};
+
+// Fungsi untuk mendapatkan nilai cookie
+const getCookie = (name) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(";").shift();
+};
 
 const Dropdown = ({ isOpen, toggle, children, className }) => (
     <div
@@ -34,19 +52,20 @@ const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [openDropdown, setOpenDropdown] = useState(null);
     const [isAccountDropdownOpen, setIsAccountDropdownOpen] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(!!getCookie("token"));
+    const [openDdown, setOpenDdown] = useState(false);
+    const [openDdown2, setOpenDdown2] = useState(false);
 
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
     const toggleDropdown = (dropdownName) => {
         setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
+        setIsAccountDropdownOpen(!isAccountDropdownOpen);
     };
 
     const toggleAccountDropdown = () => {
         setIsAccountDropdownOpen(!isAccountDropdownOpen);
     };
-
-    const [openDdown, setOpenDdown] = useState(false);
-    const [openDdown2, setOpenDdown2] = useState(false);
 
     const toggleDdownEnter = () => {
         setOpenDdown(true);
@@ -189,7 +208,7 @@ const Navbar = () => {
                                         <li>
                                             <div className="flex p-2 font-medium text-gray-600 rounded-md hover:bg-gray-100 hover:text-black">
                                                 <a href="/artikel">
-                                                    Paket Wisata
+                                                    Artikel & Berita
                                                 </a>
                                             </div>
                                         </li>
@@ -251,29 +270,27 @@ const Navbar = () => {
                             toggle={toggleAccountDropdown}
                             className="right-10 md:right-48 top-24"
                         >
-                            <div className="px-4 py-3 text-sm text-gray-900">
-                                <div>zaza</div>
-                                <div className="font-medium truncate">
-                                    zaza123@gmail.com
-                                </div>
-                            </div>
-                            <Link href="/register">
-                                <DropdownItem>Regristasi</DropdownItem>
-                            </Link>
-                            <Link href="/login">
-                                <DropdownItem>Login</DropdownItem>
-                            </Link>
-                            <Link href="#">
-                                <DropdownItem>
-                                    Update Data Personal
-                                </DropdownItem>
-                            </Link>
-                            <Link href="/account/history">
-                                <DropdownItem>Riwayat Transaksi</DropdownItem>
-                            </Link>
-                            <Link href="#">
-                                <DropdownItem>Log out</DropdownItem>
-                            </Link>
+                            {isLoggedIn ? (
+                                <>
+                                    <Link href="#">
+                                        <DropdownItem>
+                                            Update Data Personal
+                                        </DropdownItem>
+                                    </Link>
+                                    <Link href="/account/history">
+                                        <DropdownItem>
+                                            Riwayat Transaksi
+                                        </DropdownItem>
+                                    </Link>
+                                    <button onClick={handleLogout}>
+                                        <DropdownItem>Log out</DropdownItem>
+                                    </button>
+                                </>
+                            ) : (
+                                <Link href="/login">
+                                    <DropdownItem>Login/Register</DropdownItem>
+                                </Link>
+                            )}
                         </Dropdown>
                     </div>
                 </div>

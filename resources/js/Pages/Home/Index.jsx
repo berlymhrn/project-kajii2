@@ -96,8 +96,8 @@ function Index() {
     //     if (loading) {
     //         return <CardTransSkeleton />;
     //     }
-    //     const images = promo.map((item) => item.gambar);
-    //     return <CarouselComponent images={images} limit={3} />;
+    //     const images = promo.map((item) => "http://127.0.0.1:8088/" + item.gambar);
+    //     return <CarouselComponent images={images} limit={5} />;
     // };
 
     const renderPaketWisata = () => {
@@ -289,7 +289,7 @@ function Index() {
             <Navbar4 />
             <a
                 href="https://wa.me/6288225208880"
-                className="fixed bottom-10 right-10 bg-primaryColor rounded-full p-4 z-10"
+                className="fixed bottom-10 right-10 bg-primaryColor rounded-full p-4 z-50"
             >
                 <IconBrandWhatsapp className="text-white w-10 h-10" />
             </a>

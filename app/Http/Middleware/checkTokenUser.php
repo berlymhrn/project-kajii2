@@ -18,17 +18,19 @@ class CheckTokenUser
     public function handle(Request $request, Closure $next)
     {
         // Periksa apakah ada cookie 'token' dalam permintaan
-        $token = $_COOKIE['token'];
-        if ($token) {
-            $response = Http::withHeaders(['Authorization' => 'Bearer ' . $token])
-                ->get('http://localhost:8088/api/user/check');
+        if (isset($_COOKIE['token'])) {
+            $token = $_COOKIE['token'];
+
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . $token
+            ])->get('http://localhost:8088/api/user/check');
 
             // Periksa apakah respons berhasil dan token valid
-            if ($response->successful() && $response['info'] === 'Token valid') {
+            if ($response->successful() && $response->json()['info'] === 'Token valid') {
                 return $next($request);
             } else {
                 // Jika token tidak valid, hapus cookie dan alihkan ke halaman login
-                setcookie('token', '', time() - (3600 * 10), '/');
+                setcookie('token', '', time() - 3600, '/');
                 return redirect()->route('login');
             }
         }

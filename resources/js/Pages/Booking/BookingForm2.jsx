@@ -6,6 +6,8 @@ import CustomButton from "@/Components/CustomButton";
 import { usePage } from "@inertiajs/react";
 import DesaKajii from "@/services/DesaKajii";
 import ModalAlert from "@/Components/ModalAlert ";
+import Navbar4 from "@/Components/Navbar4";
+import Footer from "@/Components/Footer";
 
 function BookingForm2() {
     const { props } = usePage();
@@ -231,49 +233,27 @@ function BookingForm2() {
     };
 
     return (
-        <div className="mx-12 md:mx-20">
-            <Head>
-                <title>Pemesanan</title>
-            </Head>
-            <h1 className="font-bold text-h2 md:text-h1 mt-20 text-center mb-12 md:mb-16">
-                FORM PEMESANAN
-            </h1>
-            <div className="mb-12 md:mb-16">
-                <form className="mb-12 md:mb-16">
-                    <h4 className="text-h5 md:text-2xl font-bold mb-3">
-                        Detail Kontak
-                    </h4>
-                    <div className="mb-16">
-                        <div className="mb-5">
-                            <InputLabel
-                                labelFor={"nama"}
-                                labelText={
-                                    <span>
-                                        Nama Lengkap
-                                        <span className="text-red-500">*</span>
-                                    </span>
-                                }
-                            />
-                            <TextInput
-                                inputId={"nama"}
-                                inputType={"text"}
-                                onChange={(e) => setName(e.target.value)}
-                                value={name}
-                            />
-                            {errors.name && (
-                                <div className="text-red-500">
-                                    {errors.name}
-                                </div>
-                            )}
-                        </div>
-
-                        <div className="grid grid-cols-2 gap-5 mb-5">
-                            <div>
+        <div className="">
+            <Navbar4 />
+            <div className="mx-12 md:mx-20">
+                <Head>
+                    <title>Pemesanan</title>
+                </Head>
+                <h1 className="font-bold text-h2 md:text-h1 mt-20 text-center mb-12 md:mb-16">
+                    FORM PEMESANAN
+                </h1>
+                <div className="mb-12 md:mb-16">
+                    <form className="mb-12 md:mb-16">
+                        <h4 className="text-h5 md:text-2xl font-bold mb-3">
+                            Detail Kontak
+                        </h4>
+                        <div className="mb-16">
+                            <div className="mb-5">
                                 <InputLabel
-                                    labelFor={"contact"}
+                                    labelFor={"nama"}
                                     labelText={
                                         <span>
-                                            No Telepon
+                                            Nama Lengkap
                                             <span className="text-red-500">
                                                 *
                                             </span>
@@ -281,26 +261,84 @@ function BookingForm2() {
                                     }
                                 />
                                 <TextInput
-                                    inputId={"contact"}
+                                    inputId={"nama"}
                                     inputType={"text"}
-                                    onChange={(e) =>
-                                        setTelephone(e.target.value)
-                                    }
-                                    value={telephone}
+                                    onChange={(e) => setName(e.target.value)}
+                                    value={name}
                                 />
-                                {errors.telephone && (
+                                {errors.name && (
                                     <div className="text-red-500">
-                                        {errors.telephone}
+                                        {errors.name}
                                     </div>
                                 )}
                             </div>
 
+                            <div className="grid grid-cols-2 gap-5 mb-5">
+                                <div>
+                                    <InputLabel
+                                        labelFor={"contact"}
+                                        labelText={
+                                            <span>
+                                                No Telepon
+                                                <span className="text-red-500">
+                                                    *
+                                                </span>
+                                            </span>
+                                        }
+                                    />
+                                    <TextInput
+                                        inputId={"contact"}
+                                        inputType={"text"}
+                                        onChange={(e) =>
+                                            setTelephone(e.target.value)
+                                        }
+                                        value={telephone}
+                                    />
+                                    {errors.telephone && (
+                                        <div className="text-red-500">
+                                            {errors.telephone}
+                                        </div>
+                                    )}
+                                </div>
+
+                                <div>
+                                    <InputLabel
+                                        labelFor={"email"}
+                                        labelText={
+                                            <span>
+                                                Email
+                                                <span className="text-red-500">
+                                                    *
+                                                </span>
+                                            </span>
+                                        }
+                                    />
+                                    <TextInput
+                                        inputId={"email"}
+                                        inputType={"email"}
+                                        onChange={(e) =>
+                                            setEmail(e.target.value)
+                                        }
+                                        value={email}
+                                    />
+                                    {errors.email && (
+                                        <div className="text-red-500">
+                                            {errors.email}
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                        <h4 className="text-h5 md:text-2xl font-bold mb-3">
+                            Detail Pemesanan
+                        </h4>
+                        <div className="grid grid-cols-2 gap-5 mb-16">
                             <div>
                                 <InputLabel
-                                    labelFor={"email"}
+                                    labelFor={"booking"}
                                     labelText={
                                         <span>
-                                            Email
+                                            Jenis Booking
                                             <span className="text-red-500">
                                                 *
                                             </span>
@@ -308,129 +346,107 @@ function BookingForm2() {
                                     }
                                 />
                                 <TextInput
-                                    inputId={"email"}
-                                    inputType={"email"}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    value={email}
+                                    inputId={"booking"}
+                                    value={judul}
+                                    // inputType={"text"}
+                                    // onChange={(e) => setJudul(e.target.value)}
+                                    disabled
                                 />
-                                {errors.email && (
+                                {errors.judul && (
                                     <div className="text-red-500">
-                                        {errors.email}
+                                        {errors.judul}
+                                    </div>
+                                )}
+                            </div>
+
+                            <div>
+                                <InputLabel
+                                    labelFor={"check_in"}
+                                    labelText={
+                                        <span>
+                                            Check In
+                                            <span className="text-red-500">
+                                                *
+                                            </span>
+                                        </span>
+                                    }
+                                />
+                                <TextInput
+                                    inputId={"check_in"}
+                                    inputType={"date"}
+                                    onChange={(e) =>
+                                        setCheck_in(e.target.value)
+                                    }
+                                />
+                                {errors.check_in && (
+                                    <div className="text-red-500">
+                                        {errors.check_in}
                                     </div>
                                 )}
                             </div>
                         </div>
-                    </div>
+                        <h4 className="text-h5 md:text-2xl font-bold mb-3">
+                            Harga
+                        </h4>
+                        <h3 className="text-h5 md:text-2xl font-semibold">
+                            Rp {price}
+                        </h3>
+                    </form>
                     <h4 className="text-h5 md:text-2xl font-bold mb-3">
-                        Detail Pemesanan
+                        Pilih Metode Pembayaran
                     </h4>
-                    <div className="grid grid-cols-2 gap-5 mb-16">
-                        <div>
-                            <InputLabel
-                                labelFor={"booking"}
-                                labelText={
-                                    <span>
-                                        Jenis Booking
-                                        <span className="text-red-500">*</span>
-                                    </span>
-                                }
-                            />
-                            <TextInput
-                                inputId={"booking"}
-                                value={judul}
-                                // inputType={"text"}
-                                // onChange={(e) => setJudul(e.target.value)}
-                                disabled
-                            />
-                            {errors.judul && (
-                                <div className="text-red-500">
-                                    {errors.judul}
-                                </div>
-                            )}
-                        </div>
-
-                        <div>
-                            <InputLabel
-                                labelFor={"check_in"}
-                                labelText={
-                                    <span>
-                                        Check In
-                                        <span className="text-red-500">*</span>
-                                    </span>
-                                }
-                            />
-                            <TextInput
-                                inputId={"check_in"}
-                                inputType={"date"}
-                                onChange={(e) => setCheck_in(e.target.value)}
-                            />
-                            {errors.check_in && (
-                                <div className="text-red-500">
-                                    {errors.check_in}
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                    <h4 className="text-h5 md:text-2xl font-bold mb-3">
-                        Harga
-                    </h4>
-                    <h3 className="text-h5 md:text-2xl font-semibold">
-                        Rp {price}
-                    </h3>
-                </form>
-                <h4 className="text-h5 md:text-2xl font-bold mb-3">
-                    Pilih Metode Pembayaran
-                </h4>
-                <ul className="space-y-3 w-1/2">
-                    {radios.map((item, idx) => (
-                        <li key={idx}>
-                            <label
-                                htmlFor={item.name}
-                                className="block relative"
-                            >
-                                <input
-                                    id={item.name}
-                                    type="radio"
-                                    defaultChecked={idx === 1}
-                                    name="payment"
-                                    className="sr-only peer"
-                                />
-                                <div className="w-full flex gap-x-3 items-start p-8 cursor-pointer rounded-lg border bg-white shadow-sm ring-indigo-600 peer-checked:ring-2 duration-200">
-                                    <div className="flex-none w-20 h-6">
-                                        {item.icon}
+                    <ul className="space-y-3 w-1/2">
+                        {radios.map((item, idx) => (
+                            <li key={idx}>
+                                <label
+                                    htmlFor={item.name}
+                                    className="block relative"
+                                >
+                                    <input
+                                        id={item.name}
+                                        type="radio"
+                                        defaultChecked={idx === 1}
+                                        name="payment"
+                                        className="sr-only peer"
+                                    />
+                                    <div className="w-full flex gap-x-3 items-start p-8 cursor-pointer rounded-lg border bg-white shadow-sm ring-indigo-600 peer-checked:ring-2 duration-200">
+                                        <div className="flex-none w-20 h-6">
+                                            {item.icon}
+                                        </div>
+                                        <div>
+                                            <h3 className="leading-none text-gray-800 text-p18 md:text-h5 font-semibold ml-8">
+                                                {item.name}
+                                            </h3>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <h3 className="leading-none text-gray-800 text-p18 md:text-h5 font-semibold ml-8">
-                                            {item.name}
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div className="absolute top-8 right-4 flex-none flex items-center justify-center w-4 h-4 rounded-full border peer-checked:bg-indigo-600 text-white peer-checked:text-white duration-200"></div>
-                            </label>
-                        </li>
-                    ))}
-                </ul>
-            </div>
+                                    <div className="absolute top-8 right-4 flex-none flex items-center justify-center w-4 h-4 rounded-full border peer-checked:bg-indigo-600 text-white peer-checked:text-white duration-200"></div>
+                                </label>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
 
-            <div className="mb-20">
-                <CustomButton
-                    text={"PESAN SEKARANG"}
-                    bgColor={"bg-primaryColor"}
-                    font={"text-white font-bold"}
-                    onClick={handleButton}
-                />
-                {isModalOpen && (
-                    <ModalAlert
-                        alertMessage={
-                            "Apakah Anda sudah yakin? Mohon periksa kembali detail pesanan Anda sebelum melanjutkan"
-                        }
-                        action1={"Ya, Sudah yakin"}
-                        handleConfirm={handleConfirm}
-                        action2={"Kembali"}
-                        closeModal={closeModal}
+                <div className="mb-20">
+                    <CustomButton
+                        text={"PESAN SEKARANG"}
+                        bgColor={"bg-primaryColor"}
+                        font={"text-white font-bold"}
+                        onClick={handleButton}
                     />
-                )}
+                    {isModalOpen && (
+                        <ModalAlert
+                            alertMessage={
+                                "Apakah Anda sudah yakin? Mohon periksa kembali detail pesanan Anda sebelum melanjutkan"
+                            }
+                            action1={"Ya, Sudah yakin"}
+                            handleConfirm={handleConfirm}
+                            action2={"Kembali"}
+                            closeModal={closeModal}
+                        />
+                    )}
+                </div>
             </div>
+            <Footer />
         </div>
     );
 }
