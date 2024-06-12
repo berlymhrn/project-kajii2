@@ -49,7 +49,7 @@ const DropdownItem = ({ children, onClick }) => (
 );
 
 const Navbar = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    // const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [openDropdown, setOpenDropdown] = useState(null);
     const [isAccountDropdownOpen, setIsAccountDropdownOpen] = useState(false);
@@ -317,9 +317,6 @@ const Navbar = () => {
                             toggle={toggleAccountDropdown}
                             className="right-10 md:right-48 top-24"
                         >
-<<<<<<< HEAD
-
-=======
                             {isLoggedIn && (
                                 <>
                                     <div className="px-4 py-3 text-sm text-gray-900">
@@ -329,7 +326,6 @@ const Navbar = () => {
                                         </div>
                                     </div>
                                     <Link href="/account/update">
->>>>>>> 173aa500a74a2ead99e6fdbe9cd19197dd299be3
                                         <DropdownItem>
                                             Update Data Personal
                                         </DropdownItem>
@@ -339,11 +335,10 @@ const Navbar = () => {
                                             Riwayat Transaksi
                                         </DropdownItem>
                                     </Link>
-<<<<<<< HEAD
-
-=======
                                     <Link href="#">
-                                        <DropdownItem>Log out</DropdownItem>
+                                        <DropdownItem onClick={handleLogout}>
+                                            Log out
+                                        </DropdownItem>
                                     </Link>
                                 </>
                             )}
@@ -356,7 +351,6 @@ const Navbar = () => {
                                         <DropdownItem>Login</DropdownItem>
                                     </Link>
                                 </>
->>>>>>> 173aa500a74a2ead99e6fdbe9cd19197dd299be3
                             )}
                         </Dropdown>
                     </div>

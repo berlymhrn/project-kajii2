@@ -63,8 +63,8 @@ function Index() {
                 const profileDescResponse = await DesaKajii.get("/profile");
                 setProfileDesc(profileDescResponse.data.profile.deskripsi);
 
-                // const promoResponse = await DesaKajii.get("/promo");
-                // setPromo(promoResponse.data.promo);
+                const promoResponse = await DesaKajii.get("/promo");
+                setPromo(promoResponse.data.promo);
 
                 const paketWisataResponse = await DesaKajii.get(
                     "/paket-wisata"
@@ -92,13 +92,15 @@ function Index() {
         fetchData();
     }, []);
 
-    // const renderPromo = () => {
-    //     if (loading) {
-    //         return <CardTransSkeleton />;
-    //     }
-    //     const images = promo.map((item) => "http://127.0.0.1:8088/" + item.gambar);
-    //     return <CarouselComponent images={images} limit={5} />;
-    // };
+    const renderPromo = () => {
+        if (loading) {
+            return <CardTransSkeleton />;
+        }
+        const images = promo.map(
+            (item) => "http://127.0.0.1:8088" + item.gambar
+        );
+        return <CarouselComponent images={images} limit={5} />;
+    };
 
     const renderPaketWisata = () => {
         if (loading) {
@@ -269,8 +271,6 @@ function Index() {
         scrollInto.current.scrollIntoView({ behavior: "smooth" });
     };
 
-    console.log(document.cookie);
-
     return (
         <div>
             <Head>
@@ -341,12 +341,12 @@ function Index() {
                     />
                 </div>
 
-                {/* <div className="mb-20 md:mb-32">
+                <div className="mb-20 md:mb-32">
                     <h2 className="text-h5 md:text-h2 font-bold mb-3 md:mb-8">
                         Hanya Untuk Kamu!
                     </h2>
                     {renderPromo()}
-                </div> */}
+                </div>
 
                 <div className="mb-20 md:mb-32">
                     <h2 className="text-h5 md:text-h2 font-bold mb-3 md:mb-8">

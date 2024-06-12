@@ -57,10 +57,13 @@ export default function Login() {
                 console.log(response.data.message);
                 if (response.data.message === "success") {
                     var previousPage = document.referrer;
-                    if (previousPage.endsWith("/register")) {
+
+                    if (previousPage && previousPage.endsWith("/register")) {
+                        window.location.href = "/";
+                    } else if (!previousPage) {
                         window.location.href = "/";
                     } else {
-                        window.history.back();
+                        window.location.href = previousPage; // Memindahkan halaman ke referer sebelumnya
                     }
                 }
             } catch (error) {

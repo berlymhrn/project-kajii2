@@ -139,18 +139,21 @@ function BookingForm2() {
                 let response;
                 if (entityType === "kegiatan") {
                     response = await DesaKajii.get(`/kegiatan/${id}`);
+                    console.log(response.data);
                 } else if (entityType === "paket-wisata") {
                     response = await DesaKajii.get(`/paket-wisata/${id}`);
                 } else if (entityType === "hiburan") {
                     response = await DesaKajii.get(`/hiburan/${id}`);
                 } else if (entityType === "homestay") {
                     response = await DesaKajii.get(`/homestay/${id}`);
+                    console.log(response.data);
                 }
                 // Set id_jenis
                 const resp = await DesaKajii.get("/transaksi/jenis-booking");
                 const jenisBooking = resp.data.jenis.find(
                     (jenis) => jenis.nama === response.data.judul
                 );
+                console.log(jenisBooking);
                 setId_jenis(jenisBooking.id_jenis);
                 setJudul(response.data.judul);
                 setPrice(response.data.harga);
