@@ -75,4 +75,4 @@ Route::get('/akun', function () {
 });
 Route::get('/account/update', function () {
     return Inertia::render('ProfileUser/UpdateData');
-});
+})->middleware('checkToken');
