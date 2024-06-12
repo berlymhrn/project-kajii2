@@ -27,7 +27,6 @@ export default function Login() {
         } else if (email.trim().length > 255) {
             errors.email = "Email anda terlalu panjang";
         }
-
         if (!password.trim()) {
             errors.password = "Password harus diisi";
         } else if (password.trim().length > 255) {
@@ -55,6 +54,7 @@ export default function Login() {
                 const response = await DesaKajii.post("/user/login", formData);
                 document.cookie = `token=${response.data.token};`;
                 // Jika message dari response success maka redirect ke halaman sebelumnya
+                console.log(response.data.message);
                 if (response.data.message === "success") {
                     var previousPage = document.referrer;
                     if (previousPage.endsWith("/register")) {
@@ -64,10 +64,36 @@ export default function Login() {
                     }
                 }
             } catch (error) {
-                console.error("Error submitting registeration", error);
+                if (error.response) {
+                    const { data, status } = error.response;
+
+                    if (
+                        status === 400 &&
+                        data.info === "Password yang anda masukkan salah"
+                    ) {
+                        setErrors({ password: data.info });
+                    }
+                    else if (
+                        status === 400 &&
+                        data.info === "Email yang anda masukkan tidak terdaftar"
+                    ) {
+                        setErrors({ email: data.info });
+                    } else {
+                        console.error(  "Error login", error);
+                        setErrors({
+                            general: "Login error",
+                        });
+                    }               
+                } else {
+                    console.error("Error login", error);
+                    setErrors({
+                        general: "Terjadi kesalahan saat login.",
+                    });
+                }
             }
         }
     };
+    console.log(document.referrer);
 
     return (
         <div className="min-h-screen flex flex-col sm:justify-center items-center p-6 bg-gray-100">

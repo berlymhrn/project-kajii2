@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IconBellFilled, IconUserCircle, IconWorld } from "@tabler/icons-react";
 import logo from "../../../public/assets/logo.png";
 import { Link } from "@inertiajs/react";
@@ -49,12 +49,16 @@ const DropdownItem = ({ children, onClick }) => (
 );
 
 const Navbar = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [openDropdown, setOpenDropdown] = useState(null);
     const [isAccountDropdownOpen, setIsAccountDropdownOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(!!getCookie("token"));
     const [openDdown, setOpenDdown] = useState(false);
     const [openDdown2, setOpenDdown2] = useState(false);
+
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
 
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -83,6 +87,49 @@ const Navbar = () => {
     const toggleDdown2Leave = () => {
         setOpenDdown2(false);
     };
+
+    const checkLoggedIn = async () => {
+        const specificCookie = document.cookie
+            .split("; ")
+            .find((row) => row.startsWith("token="));
+        var token = "";
+        if (specificCookie) {
+            const regex = new RegExp("token=", "g");
+            token = specificCookie.replace(regex, "").trim();
+        }
+
+        const response = await DesaKajii.get("/user/check", {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        if (response.data.info == "Token valid") {
+            setIsLoggedIn(true);
+        }
+    };
+    const getEmailAndUsername = async () => {
+        const specificCookie = document.cookie
+            .split("; ")
+            .find((row) => row.startsWith("token="));
+        var token = "";
+        if (specificCookie) {
+            const regex = new RegExp("token=", "g");
+            token = specificCookie.replace(regex, "").trim();
+        }
+
+        const response = await DesaKajii.get("/user", {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        setUsername(response.data.username);
+        setEmail(response.data.email);
+    };
+
+    useEffect(() => {
+        checkLoggedIn();
+        getEmailAndUsername();
+    }, []);
 
     return (
         <nav className="bg-primaryColor border-gray-200 px-5 md:h-300 ">
@@ -270,9 +317,19 @@ const Navbar = () => {
                             toggle={toggleAccountDropdown}
                             className="right-10 md:right-48 top-24"
                         >
-                            {isLoggedIn ? (
+<<<<<<< HEAD
+
+=======
+                            {isLoggedIn && (
                                 <>
-                                    <Link href="#">
+                                    <div className="px-4 py-3 text-sm text-gray-900">
+                                        <div>{username}</div>
+                                        <div className="font-medium truncate">
+                                            {email}
+                                        </div>
+                                    </div>
+                                    <Link href="/account/update">
+>>>>>>> 173aa500a74a2ead99e6fdbe9cd19197dd299be3
                                         <DropdownItem>
                                             Update Data Personal
                                         </DropdownItem>
@@ -282,14 +339,24 @@ const Navbar = () => {
                                             Riwayat Transaksi
                                         </DropdownItem>
                                     </Link>
-                                    <button onClick={handleLogout}>
+<<<<<<< HEAD
+
+=======
+                                    <Link href="#">
                                         <DropdownItem>Log out</DropdownItem>
-                                    </button>
+                                    </Link>
                                 </>
-                            ) : (
-                                <Link href="/login">
-                                    <DropdownItem>Login/Register</DropdownItem>
-                                </Link>
+                            )}
+                            {!isLoggedIn && (
+                                <>
+                                    <Link href="/register">
+                                        <DropdownItem>Regristasi</DropdownItem>
+                                    </Link>
+                                    <Link href="/login">
+                                        <DropdownItem>Login</DropdownItem>
+                                    </Link>
+                                </>
+>>>>>>> 173aa500a74a2ead99e6fdbe9cd19197dd299be3
                             )}
                         </Dropdown>
                     </div>
