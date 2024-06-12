@@ -7,10 +7,6 @@ use Inertia\Inertia;
 
 require __DIR__ . '/auth.php';
 
-// Route::get('/detail/{id}', function ($id) {
-//     return Inertia::render('CobaDetail', ['id' => $id]);
-// });
-
 Route::get('/', function () {
     return Inertia::render('Home/Index');
 });
@@ -53,9 +49,9 @@ Route::get('/paket-wisata', function () {
 Route::get('/hiburan', function () {
     return Inertia::render('hiburan/Index');
 });
-Route::get('/booking', function () {
-    return Inertia::render('Booking/BookingForm2');
-});
+Route::get('/booking/{entityType}/{id}', function ($entityType, $id) {
+    return Inertia::render('Booking/BookingForm2', ['entityType' => $entityType, 'id' => $id]);
+})->middleware('checkToken');
 Route::get('/booking/detail', function () {
     return Inertia::render('Booking/BookingDetail');
 });
@@ -77,9 +73,6 @@ Route::get('/register', function () {
 Route::get('/akun', function () {
     return Inertia::render('ProfileUser/ProfileAccount');
 });
-Route::get('/update', function () {
+Route::get('/account/update', function () {
     return Inertia::render('ProfileUser/UpdateData');
-});
-Route::get('/perbarui', function () {
-    return Inertia::render('ProfileUser/Cb1');
 });

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Head } from "@inertiajs/react";
 import { usePage } from "@inertiajs/react";
 import DesaKajii from "@/services/DesaKajii";
 import CarouselComponent from "@/Components/Carousel";
@@ -6,6 +7,8 @@ import CardTransSkeleton from "@/Components/loading/CardTransSkeleton";
 import TextSkeleton from "@/Components/loading/TextSkeleton";
 import Feature from "@/Components/ListFeature";
 import CustomButton from "@/Components/CustomButton";
+import Navbar4 from "@/Components/Navbar4";
+import Footer from "@/Components/Footer";
 
 function DetailHomestay() {
     const { props } = usePage();
@@ -36,7 +39,7 @@ function DetailHomestay() {
         const cleanedImages = imageArray.map(
             (image) => "http://127.0.0.1:8088/" + image.trim()
         );
-        return <CarouselComponent images={cleanedImages} limit={5} />;
+        return <CarouselComponent images={cleanedImages} />;
     };
 
     const renderHarga = () => {
@@ -75,62 +78,74 @@ function DetailHomestay() {
     };
 
     return (
-        <div className="mx-12 md:mx-20">
-            <div className="mt-20">
-                {renderImage()}
-                <div className="flex flex-col justify-center items-center">
-                    {loading ? (
-                        <>
-                            <div className="bg-gray-200 h-6 w-2/4 rounded-full animate-pulse mb-3 mt-10"></div>
-                            <div className="bg-gray-200 h-6 w-1/4 rounded-full animate-pulse"></div>
-                        </>
-                    ) : (
-                        <h2 className="font-bold text-h5 md:text-h2 mt-10 mb-2">
-                            {detailHomestay.nama}
-                        </h2>
-                    )}
-                    <p className="font-medium text-h5 md:text-h3 text-gray-600">
-                        {renderHarga()}
-                    </p>
-                </div>
-            </div>
-            <div>
-                <div className="mb-20">
-                    <h2 className="font-bold text-h5 md:text-h2 mt-20 mb-3 md:mb-8">
-                        Deskripsi
-                    </h2>
-                    {loading ? (
-                        <TextSkeleton />
-                    ) : (
-                        <p className="text-p18 md:text-h5 font-medium">
-                            {detailHomestay.deskripsi}
+        <div>
+            <Head>
+                <title>Detail Homestay</title>
+                <meta
+                    name="description"
+                    content="Temukan homestay yang nyaman dan menawan di Desa Wisata Jogja. Dapatkan kondisi homestay, deskripsi lengkap, daftar fasilitas, dan peraturan penginapan. Nikmati kenyamanan menginap dengan pemandangan alam yang indah dan fasilitas modern yang membuat Anda betah selama berilbur di Jogja."
+                />
+            </Head>
+            <Navbar4 />
+            <div className="mx-12 md:mx-20">
+                <div className="mt-20">
+                    {renderImage()}
+                    <div className="flex flex-col justify-center items-center">
+                        {loading ? (
+                            <>
+                                <div className="bg-gray-200 h-6 w-2/4 rounded-full animate-pulse mb-3 mt-10"></div>
+                                <div className="bg-gray-200 h-6 w-1/4 rounded-full animate-pulse"></div>
+                            </>
+                        ) : (
+                            <h2 className="font-bold text-h5 md:text-h2 mt-10 mb-2">
+                                {detailHomestay.nama}
+                            </h2>
+                        )}
+                        <p className="font-medium text-h5 md:text-h3 text-gray-600">
+                            {renderHarga()}
                         </p>
-                    )}
+                    </div>
                 </div>
+                <div>
+                    <div className="mb-20">
+                        <h2 className="font-bold text-h5 md:text-h2 mt-20 mb-3 md:mb-8">
+                            Deskripsi
+                        </h2>
+                        {loading ? (
+                            <TextSkeleton />
+                        ) : (
+                            <p className="text-p18 md:text-h5 font-medium">
+                                {detailHomestay.deskripsi}
+                            </p>
+                        )}
+                    </div>
 
-                <div className="mb-20">
-                    <h2 className="font-bold text-h5 md:text-h2 mt-20 mb-3 md:mb-8">
-                        Fasilitas
-                    </h2>
-                    {renderFasilitas()}
-                </div>
+                    <div className="mb-20">
+                        <h2 className="font-bold text-h5 md:text-h2 mt-20 mb-3 md:mb-8">
+                            Fasilitas
+                        </h2>
+                        {renderFasilitas()}
+                    </div>
 
-                <div className="mb-20">
-                    <h2 className="font-bold text-h5 md:text-h2 mt-20 mb-3 md:mb-8">
-                        Peraturan Homestay
-                    </h2>
-                    <p className="text-p18 md:text-h5 font-medium">
-                        {renderPeraturan()}
-                    </p>
-                </div>
-                <div className="mb-20">
-                    <CustomButton
-                        text={"Pesan Sekarang"}
-                        bgColor={"bg-red-600"}
-                        font={"font-semibold"}
-                    />
+                    <div className="mb-20">
+                        <h2 className="font-bold text-h5 md:text-h2 mt-20 mb-3 md:mb-8">
+                            Peraturan Homestay
+                        </h2>
+                        <p className="text-p18 md:text-h5 font-medium">
+                            {renderPeraturan()}
+                        </p>
+                    </div>
+                    <div className="mb-20">
+                        <CustomButton
+                            text={"Pesan Sekarang"}
+                            bgColor={"bg-red-600"}
+                            font={"font-semibold"}
+                            linkTo={`/booking/homestay/${id}`}
+                        />
+                    </div>
                 </div>
             </div>
+            <Footer />
         </div>
     );
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Head } from "@inertiajs/react";
 import CardTransaksi from "@/Components/CardTransaction";
 import CustomButton from "@/Components/CustomButton";
 import CardTransSkeleton from "@/Components/loading/CardTransSkeleton";
@@ -6,7 +7,6 @@ import DesaKajii from "@/services/DesaKajii";
 import NoData from "../../../../public/assets/noData.png";
 import Navbar4 from "@/Components/Navbar4";
 import Footer from "@/Components/Footer";
-
 
 function Index() {
     const [news, setNews] = useState([]);
@@ -74,6 +74,13 @@ function Index() {
 
     return (
         <div>
+            <Head>
+                <title>Artikel & Berita</title>
+                <meta
+                    name="description"
+                    content="Temukan berita terbaru, artikel informatif, dan cerita menarik seputar kehidupan Desa Kajii dan industri ikan hias. Dari tips perawatan ikan hingga cerita sukses petani ikan hias, kami menyajikan berbagai konten yang inspiratif dan bermanfaat untuk para pecinta ikan hias dan pengunjung Desa Kajii. Jelajahi dunia ikan hias dengan kami dan tetap terhubung dengan perkembangan terbaru di Desa Kajii!"
+                />
+            </Head>
             <Navbar4 />
             <div className="mx-12 md:mx-20 ">
                 <h1 className="font-bold text-h2 md:text-h1 mt-20 text-center mb-12 md:mb-16">

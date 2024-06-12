@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Profile1 from "../../../../public/assets/profile1.png";
-import Profile2 from "../../../../public/assets/profile2.jpg";
-import image1 from "../../../../public/assets/HS Platy Depan.jpg";
+import { Head } from "@inertiajs/react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -173,8 +171,11 @@ function Index() {
 
     return (
         <div>
+            <Head>
+                <title>Ikan Hias</title>
+                <meta name="description" content="Temukan koleksi lengkap ikan hias yang dijual dan nikmati pengalaman memilih ikan favorit Anda di Desa Kajii! Jelajahi berbagai jenis ikan eksotis, seperti ikan koi, guppy, dll yang tersedia di kolam kami. Saksikan keindahan ikan hias yang beragam dan temukan yang paling cocok untuk menambah keindahan akuarium Anda di rumah. Jadikan kunjungan Anda ke Desa Kajii sebagai pengalaman berbelanja yang menyenangkan dan memuaskan!" />
+            </Head>
             <Navbar4 />
-
             <div>
                 <h1 className="font-bold text-h3 md:text-h1 mt-20 text-center mb-12 md:mb-16">
                     Ikan Hias Terbaik

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { usePage } from "@inertiajs/react";
 import CustomButton from "@/Components/CustomButton";
+import DesaKajii from "@/services/DesaKajii";
 
 function Payment() {
     const [bookingData, setBookingData] = useState({});
@@ -11,6 +12,15 @@ function Payment() {
             setBookingData(JSON.parse(storedData));
         }
     }, []);
+
+    const handleButton = async () => {
+        try {
+            const response = await DesaKajii.post("/transaksi/post", bookingData);
+            console.log("Response from /transaksi/post:", response.data);
+        } catch (error) {
+            console.error("Error posting transaction:", error);
+        }
+    };
 
     const radios = [
         {
@@ -136,7 +146,14 @@ function Payment() {
                                 Jenis Booking :{bookingData.bookingType}
                             </h4>
                             <h4 className="text-p18 md:text-h5 font-semibold">
-                                Tanggal CheckIn :{bookingData.checkIn}
+                                Tanggal CheckIn:{" "}
+                                {new Date(
+                                    bookingData.checkIn
+                                ).toLocaleDateString("id-ID", {
+                                    day: "2-digit",
+                                    month: "long",
+                                    year: "numeric",
+                                })}
                             </h4>
                         </div>
                     </div>
@@ -144,11 +161,11 @@ function Payment() {
             </div>
             <div className="mb-20">
                 <CustomButton
-                    text={"Selanjutnya"}
+                    text={"pesan sekarang"}
                     bgColor={"bg-primaryColor"}
                     font={"text-white font-bold"}
                     linkTo={"/booking/paymentMethod/steps"}
-                    // onClick={handleButton}
+                    onClick={handleButton}
                 />
             </div>
         </div>
